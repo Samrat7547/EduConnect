@@ -29,6 +29,8 @@ public interface UserController {
 
     @PostMapping("/update")
     public ResponseEntity<String> update(@RequestBody Map<String,String> requestMap);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Integer id);
 
 
 }

@@ -78,4 +78,14 @@ public class UserControllerImpl implements UserController {
         }
         return  new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Override
+    public ResponseEntity<String> deleteUser(Integer id) {
+        try{
+            return userService.deleteUser(id);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<>("Something went wrong",HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
