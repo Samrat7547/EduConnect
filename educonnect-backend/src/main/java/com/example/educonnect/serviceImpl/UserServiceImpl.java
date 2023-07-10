@@ -43,10 +43,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<String> signup(Map<String, String> requestMap) {
         try{
-            if(this.validateSignupMap(requestMap)){
+            if(this.validateSignupMap(requestMap,false)){
                 User user= userRepo.findByEmailId(requestMap.get("email"));
                 if(Objects.isNull(user)){
-                    userRepo.save(this.getUserFromMap(requestMap));
+                    userRepo.save(this.getUserFromMap(requestMap,false));
                     return new ResponseEntity<>("Successfully Registered", HttpStatus.OK);
                 }else{
                     return new ResponseEntity<>("Email already exists",HttpStatus.BAD_REQUEST);
@@ -60,20 +60,36 @@ public class UserServiceImpl implements UserService {
         return  new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private boolean validateSignupMap(Map<String, String> requestMap) {
-        if(requestMap.containsKey("firstName")
-                && requestMap.containsKey("lastName")
-                && requestMap.containsKey("userName")
-                && requestMap.containsKey("email")
-                && requestMap.containsKey("password")
-                && requestMap.containsKey("phone")
-                && requestMap.containsKey("profile")){
-            return true;
+    private boolean validateSignupMap(Map<String, String> requestMap,boolean validateId) {
+//        if(requestMap.containsKey("firstName")
+//                && requestMap.containsKey("lastName")
+//                && requestMap.containsKey("userName")
+//                && requestMap.containsKey("email")
+//                && requestMap.containsKey("password")
+//                && requestMap.containsKey("phone")
+//                && requestMap.containsKey("profile")){
+//            return true;
+        if(requestMap.containsKey("email")){
+            if(requestMap.containsKey("id")&& validateId){
+                return true;
+            }else return !validateId;
         }
         return  false;
     }
-    private User getUserFromMap(Map<String, String> requestMap) {
+
+//    private boolean validateSignMap(Map<String,String> requestMap,boolean validateId){
+//        if(requestMap.containsKey("name")){
+//            if(requestMap.containsKey("id")&& validateId){
+//                return true;
+//            }else return !validateId;
+//        }
+//        return false;
+//    }
+    private User getUserFromMap(Map<String, String> requestMap,boolean isAdd) {
         User user = new User();
+        if(isAdd){
+            user.setId(Integer.parseInt(requestMap.get("id")));
+        }else user.setStatus("true");
         user.setFirstName(requestMap.get("firstName"));
         user.setLastName(requestMap.get("lastName"));
         user.setUserName(requestMap.get("userName"));
@@ -82,10 +98,21 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(requestMap.get("password")));
         user.setPhone(requestMap.get("phone"));
         user.setProfile(requestMap.get("profile"));
-        user.setStatus("true");
+//        user.setStatus("true");
         user.setRole("user");
         return user;
     }
+//    private User getUserFromMap(Map<String, String> requestMap, boolean isAdd) {
+//        Product product=new Product();
+//        if(isAdd){
+//            product.setId(Integer.parseInt(requestMap.get("id")));
+//        }else product.setStatus("true");
+//        product.setName(requestMap.get("name"));
+//        product.setDescription(requestMap.get("description"));
+//        product.setPrice(Integer.parseInt(requestMap.get("price")));
+//        return product;
+//
+//    }
 
     @Override
     public ResponseEntity<String> login (Map<String,String>requestMap){
@@ -156,11 +183,11 @@ public class UserServiceImpl implements UserService {
         try{
             if(jwtFilter.isAdmin()){
 //                if(this.validateUserMap(requestMap,true)){
-                if(this.validateSignupMap(requestMap)){
+                if(this.validateSignupMap(requestMap,false)){
                     Optional<User> optional=userRepo.findById(Integer.parseInt(requestMap.get("id")));
                     if(optional.isPresent()){
 //                        User userFromMap=this.getUserFromMap(requestMap,true);
-                        User userFromMap=this.getUserFromMap(requestMap);
+                        User userFromMap=this.getUserFromMap(requestMap,true);
                         userFromMap.setStatus(optional.get().getStatus());
                         userRepo.save(userFromMap);
                         return new ResponseEntity<>("User Updated Successfully",HttpStatus.OK) ;
@@ -174,24 +201,27 @@ public class UserServiceImpl implements UserService {
         }
         return new ResponseEntity<>("Something went wrong",HttpStatus.INTERNAL_SERVER_ERROR);
     }
-//    private User getUserFromMap(Map<String, String> requestMap, boolean isAdd) {
-//        Product product=new Product();
-//        if(isAdd){
-//            product.setId(Integer.parseInt(requestMap.get("id")));
-//        }else product.setStatus("true");
-//        product.setName(requestMap.get("name"));
-//        product.setDescription(requestMap.get("description"));
-//        product.setPrice(Integer.parseInt(requestMap.get("price")));
-//        return product;
-//
-//    }
 
-    private boolean validateSignMap(Map<String,String> requestMap,boolean validateId){
-        if(requestMap.containsKey("name")){
-            if(requestMap.containsKey("id")&& validateId){
-                return true;
-            }else return !validateId;
+    @Override
+    public ResponseEntity<String> deleteUser(Integer id) {
+        try{
+            if(jwtFilter.isAdmin()){
+                Optional<User> optional=userRepo.findById(id);
+                if(optional.isPresent()){
+                    userRepo.deleteById(id);
+                    return new ResponseEntity<>("User was deleted successfully",HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<>("User with id:"+id+"does not exist",HttpStatus.NOT_FOUND);
+                }
+            }else{
+                return new ResponseEntity<>("You are not authorized for this action",HttpStatus.UNAUTHORIZED);
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
-        return false;
+        return new ResponseEntity<>("Something went wrong due to server",HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
+
 }
