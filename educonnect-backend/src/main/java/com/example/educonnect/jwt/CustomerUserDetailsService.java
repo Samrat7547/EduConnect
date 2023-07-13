@@ -20,7 +20,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
     private User userDetail;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("Inside loadUserByUsername{}",username);
+        log.info("Inside loadUserByUsername {}",username);
         userDetail=userRepo.findByEmailId(username);
         if(!Objects.isNull(userDetail))
             return  new org.springframework.security.core.userdetails.User(userDetail.getEmail(),userDetail.getPassword()

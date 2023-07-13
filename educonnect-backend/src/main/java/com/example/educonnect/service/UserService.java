@@ -22,5 +22,6 @@ public interface UserService {
 
     ResponseEntity<String> update(Map<String, String> requestMap);
 
+
     ResponseEntity<String> deleteUser(Integer id);
 }
