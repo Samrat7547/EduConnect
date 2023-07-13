@@ -24,6 +24,7 @@ public class UserControllerImpl implements UserController {
             return userService.signup(requestMap);
         }catch(Exception ex){
             ex.printStackTrace();
+
         }
         return new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
     }

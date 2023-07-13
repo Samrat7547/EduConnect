@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -60,14 +61,14 @@ public class UserServiceImpl implements UserService {
         return  new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    private boolean validateSignupMap(Map<String, String> requestMap,boolean validateId) {
+    private boolean validateSignupMap(Map<String, String> requestMap, boolean validateId) {
 //        if(requestMap.containsKey("firstName")
 //                && requestMap.containsKey("lastName")
 //                && requestMap.containsKey("userName")
 //                && requestMap.containsKey("email")
 //                && requestMap.containsKey("password")
-//                && requestMap.containsKey("phone")
-//                && requestMap.containsKey("profile")){
+//                && requestMap.containsKey("phone")){
+////                && requestMap.containsKey("profile")){
 //            return true;
         if(requestMap.containsKey("email")){
             if(requestMap.containsKey("id")&& validateId){
@@ -85,7 +86,7 @@ public class UserServiceImpl implements UserService {
 //        }
 //        return false;
 //    }
-    private User getUserFromMap(Map<String, String> requestMap,boolean isAdd) {
+    private User getUserFromMap(Map<String,String> requestMap, boolean isAdd) {
         User user = new User();
         if(isAdd){
             user.setId(Integer.parseInt(requestMap.get("id")));
@@ -115,9 +116,11 @@ public class UserServiceImpl implements UserService {
 //    }
 
     @Override
-    public ResponseEntity<String> login (Map<String,String>requestMap){
+    public ResponseEntity<String> login (Map<String,String> requestMap){
         log.info("Inside login");
         try{
+
+            log.info("himanshuError");
             Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken
                     (requestMap.get("userName"),requestMap.get("password")));
             if(authentication.isAuthenticated()){
