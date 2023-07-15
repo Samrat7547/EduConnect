@@ -7,4 +7,5 @@ export default interface User {
     password: String;
     phone: String;
     profile: String;
+  
   }

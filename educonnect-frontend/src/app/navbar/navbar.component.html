@@ -34,11 +34,16 @@
             </a>
           </ng-container>
           <ng-container *ngIf="isAuthenticated()">
+            
             <button
               class="text-gray-300 hover:bg-gray-700 hover:text-white px-2 py-1 lg:px-3 lg:py-2 rounded-md font-medium"
+              routerLink="/{{userDetails.role}}/profile"
             >
               <ng-container *ngIf="!getRole()">
-                {{ userDetails[0].userName }}
+                
+                <!-- {{ userDetails[0].userName }} -->
+                {{ userDetails.userName }}
+
               </ng-container>
               <ng-container *ngIf="getRole()"> ADMIN </ng-container>
             </button>

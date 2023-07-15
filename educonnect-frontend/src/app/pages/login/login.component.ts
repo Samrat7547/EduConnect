@@ -58,14 +58,26 @@ export class LoginComponent implements OnInit {
 
             this.sharedDataService.setUserDetails(user);
             this.userDetails = user;
+            if(this.authService.getRole()){
+              //admin dashboard
+              this.router.navigate(['/admin']);
+              this.toastr.success('Yay! You are logged in.', 'Admin Login Succesful');
+
+            }else{
+              //user-dashboard
+              this.router.navigate(['/user-dashboard']);
+              this.toastr.success('Yay! You are logged in.', 'User Login Succesful');
+            }
           },
           (error) => {
             this.toastr.error('Something went wrong!');
           }
         );
 
-        this.router.navigate(['/home']);
-        this.toastr.success('Yay! You are logged in.', 'Login Succesful');
+        
+        // this.toastr.success('Yay! You are logged in.', 'Login Succesful');
+        // this.router.navigate(['/home']);
+        
       },
       (error) => {
         this.errorMessage = 'Wrong user credentials';

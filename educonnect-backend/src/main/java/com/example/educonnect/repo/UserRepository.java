@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User,Integer> {
 
@@ -18,6 +19,8 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 //    Optional<User> findById(Integer integer);
 
     List<UserWrapper>getByUsername(@Param("username") String currentUser);
+    Optional<UserWrapper> getByName(@Param("username") String currentUser);
+
 
     @Transactional
     @Modifying

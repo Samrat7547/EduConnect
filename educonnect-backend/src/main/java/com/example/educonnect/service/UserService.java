@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -24,4 +25,6 @@ public interface UserService {
 
 
     ResponseEntity<String> deleteUser(Integer id);
+
+    ResponseEntity<Optional> getCurrentUser();
 }
