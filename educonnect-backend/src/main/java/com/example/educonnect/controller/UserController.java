@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin
 @RequestMapping(path = "/user")
@@ -21,8 +22,11 @@ public interface UserController {
 //    public ResponseEntity<UserWrapper> getSingleUser(@PathVariable String userName);
 
     @CrossOrigin
-    @GetMapping("/userDetails")
+    @GetMapping("/allUser")
     public ResponseEntity<List<UserWrapper>> getAllUsers();
+
+    @GetMapping("/userDetails")
+    public ResponseEntity<Optional> getCurrentUser();
 
     @PostMapping("/updateStatus")
     public ResponseEntity<String> updateStatus(@RequestBody Map<String,String> requestMap);

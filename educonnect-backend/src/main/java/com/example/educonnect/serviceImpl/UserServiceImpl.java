@@ -119,8 +119,6 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<String> login (Map<String,String> requestMap){
         log.info("Inside login");
         try{
-
-            log.info("himanshuError");
             Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken
                     (requestMap.get("userName"),requestMap.get("password")));
             if(authentication.isAuthenticated()){
@@ -158,6 +156,17 @@ public class UserServiceImpl implements UserService {
             ex.printStackTrace();
         }
         return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<Optional> getCurrentUser() {
+        try{
+
+                return new ResponseEntity<>(userRepo.getByName(jwtFilter.getCurrentUser()),HttpStatus.OK);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
@@ -224,6 +233,7 @@ public class UserServiceImpl implements UserService {
         }
         return new ResponseEntity<>("Something went wrong due to server",HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 
 
 

@@ -19,6 +19,6 @@ public class UserWrapper {
     //private boolean enabled = true;
     private String status;
     private String profile;
-//    private String role;
+    private String role;
 
 }

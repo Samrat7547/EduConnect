@@ -13,6 +13,16 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './pages/register/register.component';
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import {MatListModule} from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon'
+import {MatTableModule} from '@angular/material/table';
+
+import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +31,21 @@ import { RegisterComponent } from './pages/register/register.component';
     LoginComponent,
     HomeComponent,
     RegisterComponent,
+    DashboardComponent,
+    UserDashboardComponent,
+    ProfileComponent,
+    SidebarComponent,
+    WelcomeComponent,
+  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatListModule,
+    MatCardModule,
+    MatIconModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-right',
@@ -34,7 +53,7 @@ import { RegisterComponent } from './pages/register/register.component';
       closeButton: true,
     }),
     BrowserAnimationsModule,
-    
+    MatTableModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

@@ -59,6 +59,7 @@ export class RegisterComponent implements OnInit {
         (error) => {
           this.errorMessage = 'Username or Email already exists!';
           console.log('Registration failed!');
+          // console.log(error);
           console.log(error.error.text);
           if (error.error.text==='Successfully Registered'){
             this.router.navigate(['/login']);
