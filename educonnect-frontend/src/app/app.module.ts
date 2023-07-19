@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,9 +21,21 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon'
 import {MatTableModule} from '@angular/material/table';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button'
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
+
 
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
+import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
+import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
+import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.component';
+import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +49,10 @@ import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
     ProfileComponent,
     SidebarComponent,
     WelcomeComponent,
+    ViewCategoriesComponent,
+    AddCategoryComponent,
+    ViewQuizzesComponent,
+    AddQuizComponent,
   
   ],
   imports: [
@@ -46,6 +63,13 @@ import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
     MatListModule,
     MatCardModule,
     MatIconModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    MatSelectModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-right',
@@ -62,8 +86,10 @@ import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
         disallowedRoutes: ['example.com/examplebadroute/'],
       },
     }),
+    
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
