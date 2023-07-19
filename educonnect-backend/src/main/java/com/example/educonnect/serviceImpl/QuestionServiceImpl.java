@@ -45,4 +45,11 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> getQuestionsOfQuiz(Quiz quiz) {
         return this.questionRepo.findByQuiz(quiz);
     }
+
+    @Override
+    public void deleteQuestion(Integer quesId) {
+    Question question= new Question();
+    question.setQuesId(quesId);
+    this.questionRepo.delete(question);
+    }
 }
