@@ -1,0 +1,11 @@
+.mat-icon {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+.custom-theme {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  .min-h-screen-80 {
+    min-height: 80vh;
+  }

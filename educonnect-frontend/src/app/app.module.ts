@@ -28,14 +28,21 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button'
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 
 
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+import { SidebarComponent as UserSidebar} from './pages/user/sidebar/sidebar.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
 import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
 import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.component';
 import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
+import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.component';
+import { ViewQuizQuestionsComponent } from './pages/admin/view-quiz-questions/view-quiz-questions.component';
+import { AddQuestionComponent } from './pages/admin/add-question/add-question.component';
+import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +60,11 @@ import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
     AddCategoryComponent,
     ViewQuizzesComponent,
     AddQuizComponent,
+    UpdateQuizComponent,
+    ViewQuizQuestionsComponent,
+    AddQuestionComponent,
+    UserSidebar,
+    LoadQuizComponent
   
   ],
   imports: [
@@ -70,6 +82,7 @@ import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
     MatButtonModule,
     MatSlideToggleModule,
     MatSelectModule,
+    CKEditorModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-right',

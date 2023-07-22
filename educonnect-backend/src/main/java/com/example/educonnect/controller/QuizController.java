@@ -15,7 +15,7 @@ public interface QuizController {
     public ResponseEntity<Quiz> addQuiz(@RequestBody Quiz quiz);
 
     @GetMapping(path = "/{qId}")
-    public Optional<Quiz> getQuiz (@PathVariable("qId") Integer qId);
+    public Quiz getQuiz (@PathVariable("qId") Integer qId);
 
     @GetMapping(path = "/allQuiz")
     public List<Quiz> getquizzes();

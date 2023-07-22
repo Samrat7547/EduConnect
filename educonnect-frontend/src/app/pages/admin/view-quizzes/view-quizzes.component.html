@@ -16,13 +16,14 @@
         <p>{{q.description}}</p>
       </mat-card-content>
       <mat-card-action>
-        <button mat-raised-button  color="accent" class="ml20" >Questions</button> 
+        <button mat-raised-button [routerLink]="'/admin/view-questions/'+q.qid+'/'+q.title" color="accent" class="ml20" >Questions</button> 
         <!-- <button mat-flat-button color="accent" class="button" > Update</button> -->
-        <button mat-flat-button color="primary" class="ml20" > Update</button>
-        <button mat-flat-button color="warn" class="ml20" > Delete</button>
+        <button [routerLink]="'/admin/quiz/'+q.qid" mat-flat-button color="primary" class="ml20" > Update</button>
+        <button mat-flat-button color="warn" class="ml20" (click)="deleteQuiz(q.qid)" > Delete</button>
         <button mat-stroked-button color="accent" class="ml20" > Max Marks {{q.maxMarks}}</button>
          <button mat-stroked-button color="accent" class="ml20" > Questions {{q.numberOfQuestions}}</button>
         <button mat-stroked-button color="accent" class="ml20" > Attempts</button>
+        <button mat-stroked-button *ngIf="q.active" color="accent" class="ml20" > Active</button>
       </mat-card-action>
 </mat-card>
 

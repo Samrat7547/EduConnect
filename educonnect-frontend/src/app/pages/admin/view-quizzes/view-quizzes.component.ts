@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { QuizService } from 'src/app/services/quiz/quiz.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-view-quizzes',
@@ -34,10 +37,11 @@ export class ViewQuizzesComponent implements OnInit{
   //   }
   // ]
 
-  constructor(private quiz:QuizService){}
+  constructor(private _quiz:QuizService, private toastr: ToastrService){}
   
   ngOnInit(): void {
-    this.quiz.quizzes().subscribe((data:any)=>{
+    this._quiz.quizzes().subscribe(
+      (data:any)=>{
       this.quizzes=data;
       console.log(this.quizzes);
       
@@ -47,5 +51,52 @@ export class ViewQuizzesComponent implements OnInit{
       
     })
   }
+
+  deleteQuiz(qId: any){
+    // alert(qId);
+    Swal.fire({
+      icon:"warning",
+      title:"Do you want to delete?",
+      confirmButtonText:"Delete",
+      showCancelButton:true,
+    }).then((result)=>{
+      if(result.isConfirmed){
+        //delete
+        this._quiz.deleteQuiz(qId).subscribe(
+          (data:any)=>{
+            this.quizzes=this.quizzes.filter((quiz:any)=>quiz.qid!=qId)
+            this.toastr.success('Success!','Quiz deleted successfully');
+          },
+          (error)=>{
+            console.log(error);
+            this.toastr.error('Error','Error in deleting quiz');
+          }
+        );
+      }
+    })
+  }
+
+
+
+
+
+
+  // deleteQuiz(qId: any) {
+  //   const confirmation = confirm('Are you sure you want to delete this quiz?');
+  //   if (confirmation) {
+  //     this._quiz.deleteQuiz(qId).subscribe(
+  //       (data: any) => {
+  //         this.quizzes = this.quizzes.filter((quiz: any) => quiz.qid != qId);
+  //         this.toastr.success('Success!', 'Quiz deleted successfully');
+  //       },
+  //       error => {
+  //         console.log(error);
+  //         this.toastr.error('Error', 'Error in deleting quiz');
+  //       }
+  //     );
+  //   }
+  // }
+  
+ 
 
 }

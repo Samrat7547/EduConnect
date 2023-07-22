@@ -68,10 +68,7 @@ export class AddQuizComponent implements OnInit{
       this.toastr.error('Number of Questions required!');
       return;
     }
-    if(this.quizData.category.cid.trim()=='' || this.quizData.category.cid==null){
-      this.toastr.error('Category required!');
-      return;
-    }
+  
 
     this._quiz.addQuiz(this.quizData).subscribe(
       (data:any)=>{
