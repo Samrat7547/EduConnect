@@ -18,5 +18,7 @@ public interface QuestionService {
 
     public List<Question> getQuestionsOfQuiz(Quiz quiz);
 
+
+
     public void deleteQuestion(Integer quesId);
 }

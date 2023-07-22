@@ -13,6 +13,10 @@ import { ViewCategoriesComponent } from './pages/admin/view-categories/view-cate
 import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
 import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.component';
 import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
+import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.component';
+import { ViewQuizQuestionsComponent } from './pages/admin/view-quiz-questions/view-quiz-questions.component';
+import { AddQuestionComponent } from './pages/admin/add-question/add-question.component';
+import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
 
 // const routes: Routes = [];
 const routes: Routes = [
@@ -50,9 +54,28 @@ const routes: Routes = [
       path:'add-quiz',
       component:AddQuizComponent
     },
+    {
+      path:'quiz/:qid',
+      component:UpdateQuizComponent
+    },
+    {
+      path:'view-questions/:qid/:title',
+      component:ViewQuizQuestionsComponent
+    },
+    {
+      path:'add-question/:qid/:title',
+      component:AddQuestionComponent
+    },
   ]
 },
-  { path: 'user-dashboard', component: UserDashboardComponent , canActivate: [NormalGuard]},
+  { path: 'user-dashboard', component: UserDashboardComponent , canActivate: [NormalGuard],
+  children:[
+    {
+      path:':catId',
+      component:LoadQuizComponent
+    },
+  ]
+},
 
 ]
 

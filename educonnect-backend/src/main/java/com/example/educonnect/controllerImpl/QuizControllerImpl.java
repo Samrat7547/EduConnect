@@ -25,7 +25,7 @@ public class QuizControllerImpl implements QuizController {
     }
 
     @Override
-    public Optional<Quiz> getQuiz(Integer qId) {
+    public Quiz getQuiz(Integer qId) {
         return this.quizService.getQuiz(qId);
     }
 

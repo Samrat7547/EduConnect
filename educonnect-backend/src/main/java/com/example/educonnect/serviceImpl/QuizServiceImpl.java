@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -35,8 +34,8 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public Optional<Quiz> getQuiz(Integer qId) {
-        return this.quizRepo.findById(qId);
+    public Quiz getQuiz(Integer qId) {
+        return this.quizRepo.findById(qId).get();
     }
 
     @Override

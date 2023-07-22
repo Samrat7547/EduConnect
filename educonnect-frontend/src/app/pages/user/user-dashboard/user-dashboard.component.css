@@ -1,0 +1,7 @@
+.custom-theme {
+    background-color: #FFD1DC;
+    color: #333;
+  }
+  .min-h-screen-80 {
+    min-height: 90vh;
+  }

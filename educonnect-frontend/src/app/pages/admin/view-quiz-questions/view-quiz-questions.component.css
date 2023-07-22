@@ -1,0 +1,12 @@
+.button {
+   
+    margin-left:3em;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    /* margin-left: ($spacer * .25) !important; */
+  }
+  p span br {
+    display: none; /* Hide the line breaks within the <span> element */
+  }
+  
+  

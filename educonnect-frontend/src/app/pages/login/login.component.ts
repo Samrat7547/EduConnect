@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
 
             }else{
               //user-dashboard
-              this.router.navigate(['/user-dashboard']);
+              this.router.navigate(['/user-dashboard/0']);
               this.toastr.success('Yay! You are logged in.', 'User Login Succesful');
             }
           },

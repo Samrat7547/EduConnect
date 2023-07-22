@@ -20,6 +20,9 @@ public interface QuestionController {
 //    public ResponseEntity<?> getQuestionsOfQuiz(@PathVariable("qId") Integer qId);
     public ResponseEntity<?> getQuestionsOfQuiz(@PathVariable("qid") Integer qid);
 
+    @GetMapping(path="/quiz/all/{qid}")
+    public ResponseEntity<?> getQuestionsOfQuizAdmin(@PathVariable("qid") Integer qid);
+
     @GetMapping("/{quesId}")
     public Question getQuestion(@PathVariable("quesId") Integer quesId);
 
