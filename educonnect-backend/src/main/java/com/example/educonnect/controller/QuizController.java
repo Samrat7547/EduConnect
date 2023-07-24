@@ -25,4 +25,16 @@ public interface QuizController {
 
     @DeleteMapping(path = "/{qId}")
     public  void deleteQuiz(@PathVariable("qId") Integer qId);
+
+    @GetMapping(path="/category/{cid}")
+    public List<Quiz> getQuizzesOfCategory(@PathVariable("cid") Integer cid);
+
+    @GetMapping(path="/active")
+    public List<Quiz> getActiveQuizzes();
+
+    @GetMapping(path="/category/active/{cid}")
+    public List<Quiz> getActiveQuizzesOfCategory (@PathVariable("cid") Integer cid);
+
+
+
 }

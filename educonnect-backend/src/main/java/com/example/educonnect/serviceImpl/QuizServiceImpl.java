@@ -1,5 +1,6 @@
 package com.example.educonnect.serviceImpl;
 
+import com.example.educonnect.model.Category;
 import com.example.educonnect.model.Quiz;
 import com.example.educonnect.repo.QuizRepo;
 import com.example.educonnect.service.QuizService;
@@ -41,5 +42,20 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public void deleteQuiz(Integer qId) {
         this.quizRepo.deleteById(qId);
+    }
+
+    @Override
+    public List<Quiz> getquizzesOfCategory(Category category) {
+        return this.quizRepo.findBycategory(category);
+    }
+
+    @Override
+    public List<Quiz> getActiveQuizzes() {
+        return this.quizRepo.findByActive(true);
+    }
+
+    @Override
+    public List<Quiz> getActiveQuizzesOfCategory(Category c) {
+        return this.quizRepo.findByCategoryAndActive(c,true);
     }
 }

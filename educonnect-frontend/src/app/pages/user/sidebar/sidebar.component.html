@@ -4,12 +4,12 @@
 
         <mat-card-title style="color: rgb(25, 0, 255); margin-left: 20px; margin-top: 10px;">User Dashboard</mat-card-title>
         <div class="mt20">
-        <button routerLink="/user" mat-list-item><mat-icon>home</mat-icon>Home</button>
+        <button routerLink="/user-dashboard/0" mat-list-item><mat-icon>home</mat-icon>Home</button>
         <button mat-list-item >
             <mat-icon>account_circle</mat-icon>Profile</button>
             <button mat-list-item >
                 <mat-icon>quiz</mat-icon>All Quizzes</button>
-        <button mat-list-item *ngFor="let c of categories">
+        <button [routerLink]="'/user-dashboard/'+c.cid" mat-list-item *ngFor="let c of categories">
                 <mat-icon>list</mat-icon>{{c.title}}</button>
       
         

@@ -29,6 +29,8 @@ import { MatButtonModule } from '@angular/material/button'
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -43,6 +45,10 @@ import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.compo
 import { ViewQuizQuestionsComponent } from './pages/admin/view-quiz-questions/view-quiz-questions.component';
 import { AddQuestionComponent } from './pages/admin/add-question/add-question.component';
 import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
+import { InstructionsComponent } from './pages/user/instructions/instructions.component';
+import { StartComponent } from './pages/user/start/start.component';
+
+
 
 @NgModule({
   declarations: [
@@ -64,7 +70,9 @@ import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
     ViewQuizQuestionsComponent,
     AddQuestionComponent,
     UserSidebar,
-    LoadQuizComponent
+    LoadQuizComponent,
+    InstructionsComponent,
+    StartComponent,
   
   ],
   imports: [
@@ -83,6 +91,8 @@ import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
     MatSlideToggleModule,
     MatSelectModule,
     CKEditorModule,
+    MatDialogModule,
+    MatRadioModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-right',
@@ -104,5 +114,6 @@ import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  // export class AppModule {},
 })
 export class AppModule { }

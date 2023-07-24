@@ -1,0 +1,78 @@
+<div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-card  style="margin-top: 20px;">
+                    <mat-card-header>
+
+                        <mat-card-title style="color: blue;">
+                            Read the instructions of this page carefully
+                        </mat-card-title>
+
+                        <mat-card-subtitle>
+                            One step more to go...
+                        </mat-card-subtitle>
+                
+                    </mat-card-header>
+                        
+
+
+                    <mat-card-content class="mt20">
+                        <h1>Quiz Name : <b>{{quiz.title}}</b></h1>
+                        <p class="mt10">{{quiz.description}}</p>
+
+                        <mat-divider></mat-divider>
+                        <h1 class="mt20"><b>Importatnt Instructions</b></h1>
+                        <ul class="mt10 ml20">
+                            <li> 1) Make sure to read all questions carefully.</li>
+                            <li> 2) You have to submit quiz within <b>{{quiz.numberOfQuestions*2}} mins</b>.</li>
+                            <li> 3) You can attempt the quiz any number of times.</li>
+                            <li> 4) There are <b>{{quiz.numberOfQuestions}} questions</b> in this quiz.</li>
+                            <li> 5) Each question carries <b>{{quiz.maxMarks/quiz.numberOfQuestions}} marks</b>.
+                                 No negative marking for wrong answers.</li>
+                            <li> 6) All questions is of MCQ types.</li>
+                        </ul>
+
+                        <mat-divider></mat-divider>
+                        <br/>
+                        <h1><b>Attempting Quiz</b></h1>
+
+                        <ul class="mt10 ml20">
+                            <li> 1) Click <b>Start Test</b> button to start the quiz.</li>
+                            <li> 2) The time will start the moment you click the Start Test.</li>
+                            <li> 3) You cannot resume the quiz, if interrupted due to any reason.
+                                 So kindly make sure you have good network connection.</li>
+                            <li> 4) Click on <b>Next</b> button to move to next question.</li>
+                            <li> 5) Click on <b>Submit Quiz</b> button on completion of the quiz.</li>
+                            <li> 6) Report of the Test is automatically generated in PDF format and you can download it if needed.</li>
+                        </ul>
+
+                    </mat-card-content>
+
+                    
+                    <div class="parent-container">
+                        <mat-card-actions >
+                          
+                          <button class="mb10" mat-raised-button color="primary" (click)="startTest()"
+                          [mat-dialog-close]="true" cdkFocusInitial>Start Test</button>
+                          <button  class="mb10 ml20" mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+                        </mat-card-actions>
+                      </div>
+
+
+                      <!-- <mat-dialog-actions align="end">
+                        <button mat-button mat-dialog-close>Cancel</button>
+                        <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+                      </mat-dialog-actions> -->
+                      
+
+
+                    <!-- <mat-card-actions class="text-center">
+                        <button class="" mat-raised-button color="warn">START TEST</button>
+                        
+                    </mat-card-actions> -->
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
