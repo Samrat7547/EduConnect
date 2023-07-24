@@ -1,6 +1,7 @@
 package com.example.educonnect.controllerImpl;
 
 import com.example.educonnect.controller.QuizController;
+import com.example.educonnect.model.Category;
 import com.example.educonnect.model.Quiz;
 import com.example.educonnect.service.QuizService;
 import lombok.RequiredArgsConstructor;
@@ -42,5 +43,24 @@ public class QuizControllerImpl implements QuizController {
     @Override
     public void deleteQuiz(Integer qId) {
         this.quizService.deleteQuiz(qId);
+    }
+
+    @Override
+    public List<Quiz> getQuizzesOfCategory(Integer cid) {
+        Category category = new Category();
+        category.setCid(cid);
+        return this.quizService.getquizzesOfCategory(category);
+    }
+
+    @Override
+    public List<Quiz> getActiveQuizzes() {
+        return this.quizService.getActiveQuizzes();
+    }
+
+    @Override
+    public List<Quiz> getActiveQuizzesOfCategory(Integer cid) {
+        Category category = new Category();
+        category.setCid(cid);
+        return this. quizService.getActiveQuizzesOfCategory(category);
     }
 }
