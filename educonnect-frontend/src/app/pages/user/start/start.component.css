@@ -6,3 +6,10 @@
 .overall {
   cursor: not-allowed;
 }
+.fixed-column {
+  position: sticky;
+  top: 0;
+  height: 100vh; /* Adjust the height to your preference */
+  overflow-y: auto;
+}
+

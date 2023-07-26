@@ -15,8 +15,8 @@
                         <b>Q {{i+1}}) </b>
                         <span [innerHTML]="q.content" style="display: inline;"></span>
                       </p> -->
-                      <div style="display: flex; align-items: center; font-size: 20px;">
-                        <p style="margin-right: 5px;"><b>Q {{ i + 1 }})</b></p>
+                      <div style="display: flex;  font-size: 20px;">
+                        <p style="margin-right: 5px;"><b>{{ i + 1 }})</b></p>
                         <div [innerHTML]="q.content"></div>
                       </div>
                       
@@ -54,7 +54,7 @@
 
                  <mat-card-action>
                     <button mat-flat-button (click)="deleteQuestion(q.quesId)" color="warn" class="button"> Delete</button>
-                    <button  mat-flat-button color="primary" class="button"> Update</button>
+                    <button  [routerLink]="'/admin/question/'+q.quesId+'/'+qId+'/'+qTitle" mat-flat-button color="primary" class="button"> Update</button>
         
                  </mat-card-action>
 

@@ -23,5 +23,11 @@ export class QuestionService {
   {
     return this.http.get(`${this.baseUrl}/quiz/${qid}`);
   }
+  public updateQuestion(question: any){
+    return this.http.put(`${this.baseUrl}/update`,question);
+  }
+  public getQuestion(quesId: any){
+    return this.http.get(`${this.baseUrl}/${quesId}`);
+  }
 
 }

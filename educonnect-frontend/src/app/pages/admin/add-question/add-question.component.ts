@@ -90,6 +90,12 @@ export class AddQuestionComponent implements OnInit{
         answer:''
       }
       this.toastr.success('Success!!','Question added successfully');
+      setTimeout(() => {
+        console.log("Refreshed");
+        window.location.reload();
+        // this.router.navigate(['/admin/add-question/'+this.qId+'/'+this.qTitle]);
+        // this.router.navigate(['/admin/quizzes']);
+      }, 500);
     },
     (error)=>{
       console.log(error);

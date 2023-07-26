@@ -1,9 +1,10 @@
- <div class="bootstrap-wrapper">
+<div class="bootstrap-wrapper">
     <div class="row">
         <div class="col-md-12">
             <!-- <h1>Adding to quiz {{qTitle}}</h1> -->
-            <mat-card-title style="color: red; margin-left: 20px; margin-top: 20px;font-size: 20px;">Adding Question to
-              <span style="font-weight: bold;"> {{qTitle}}</span></mat-card-title>
+            <mat-card-title style="color: red; margin-left: 20px; margin-top: 20px;font-size: 20px;">Update Question
+                <b>{{quesId}}</b>
+              </mat-card-title>
             <mat-card class="mt20 ">
                 <mat-card-header>
                     <mat-card-subtitle style="color: red; margin-left: 20px; margin-top: 20px;margin-bottom: 10px;">
@@ -12,7 +13,7 @@
                 </mat-card-header>
                 <mat-card-content class="mt20">
 
-                   <form (submit)="formSubmit()">
+                   <form *ngIf="question" (ngSubmit)="updateData()">
                     
                     <!-- <mat-form-field class="w100">
                         <mat-label>Write question here </mat-label>
@@ -69,13 +70,13 @@
                             <mat-option *ngIf="question.option1" [value]="question.option1">{{question.option1}}</mat-option>
                             <mat-option *ngIf="question.option2" [value]="question.option2">{{question.option2}}</mat-option>
                             <mat-option *ngIf="question.option3" [value]="question.option3">{{question.option3}}</mat-option>
-                            <mat-option *ngIf="question.option4" [value]="question.option4">{{question.option4}}</mat-option>
+                            <mat-option *ngIf="question.option1" [value]="question.option4">{{question.option4}}</mat-option>
                         </mat-select>
                       </mat-form-field>
 
 
                       <div class="container text-center mt10">
-                        <button  mat-button class="buttons">Add</button>
+                        <button  mat-button class="buttons">Update</button>
                     </div>
 
                       

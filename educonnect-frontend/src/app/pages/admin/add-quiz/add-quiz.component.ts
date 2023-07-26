@@ -79,6 +79,11 @@ export class AddQuizComponent implements OnInit{
         this.quizData.category.cid='';
         // this.router.navigate(['/admin/quizzes']);
         this.toastr.success('Success!','Quiz added successfully');
+        setTimeout(() => {
+          console.log("Refreshed");
+          window.location.reload();
+          
+        }, 500);
       },
       (error)=>{
         console.log(error);

@@ -1,7 +1,7 @@
 <div class="bootstrap-wrapper overall" *ngIf="!isSubmit" appFullScreen>
     <div class="container-fluid">
        <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 fixed-column">
            
             <mat-card class="" style="margin-top: 60px; background-color: aquamarine;">
                 <mat-card-header>
@@ -45,7 +45,7 @@
             <mat-card *ngFor="let q of questions; let i =index" class="mt10" style="background-color: aqua;">
                 <mat-card-content>
                     <div style="display: flex; align-items: center; font-size: 20px;">
-                        <p style="margin-right: 5px;"><b>Q {{ i + 1 }})</b></p>
+                        <p style="margin-right: 5px;"><b>{{ i + 1 }})</b></p>
                         <div class="ml10" [innerHTML]="q.content"></div>
                       </div>
                       
@@ -93,7 +93,7 @@
             </div>
 
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 fixed-column">
             
             <mat-card class="" style=" margin-top: 60px; background-color: aquamarine;">
                 <mat-card-header>
@@ -140,7 +140,7 @@
                 </mat-card-content>
                 <mat-card-content *ngFor="let q of questions; let i =index" class="mt10">
                     <div style="display: flex; align-items: center; font-size: 20px; margin-top: 20px;">
-                        <p style="margin-right: 5px;"><b>Q {{ i + 1 }})</b></p>
+                        <p style="margin-right: 5px;"><b>{{ i + 1 }})</b></p>
                         <div class="ml10" [innerHTML]="q.content"></div>
                       </div>
 

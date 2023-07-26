@@ -19,11 +19,24 @@
            <br>
            <b>We are on a mission to reshape the process of how students prepare online for competitive exams</b>
         </p>
+        <ng-container *ngIf="!isAuthenticated()">
         <a
           href="#features"
           class="inline-block px-8 py-3 mt-8 font-medium text-white bg-purple-500 rounded-md hover:bg-purple-600"
-          >Get started</a
-        >
+          >Get started</a>
+        </ng-container>
+        <ng-container *ngIf="!getRole() && isAuthenticated()">
+          <a
+          routerLink="/user-dashboard/0"
+            class="inline-block px-8 py-3 mt-8 font-medium text-white bg-purple-500 rounded-md hover:bg-purple-600"
+            >Get started</a>
+          </ng-container>
+          <ng-container *ngIf="getRole() && isAuthenticated()">
+            <a
+            routerLink="/{{userDetails.role}}/profile"
+              class="inline-block px-8 py-3 mt-8 font-medium text-white bg-purple-500 rounded-md hover:bg-purple-600"
+              >Get started</a>
+            </ng-container>
       </div>
     </section>
   

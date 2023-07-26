@@ -32,6 +32,11 @@ export class AddCategoryComponent  implements OnInit {
         this.category.description='';
         // this.router.navigate(['/admin/categories']);
         this.toastr.success('Success!','Category added successfully');
+        setTimeout(() => {
+          console.log("Refreshed");
+          window.location.reload();
+          
+        }, 500);
       },
       (error)=>{
         console.log(error);

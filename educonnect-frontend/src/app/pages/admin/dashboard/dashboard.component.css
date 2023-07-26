@@ -5,3 +5,19 @@
   .min-h-screen-80 {
     min-height: 90vh;
   }
+  /* Media Query for responsiveness */
+@media (max-width: 992px) {
+  /* Adjust the breakpoint (992px) as needed */
+  .col-md-2 {
+    display: none; /* Hide the sidebar on smaller screens */
+  }
+
+  .col-md-10 {
+    padding-left: 0; /* Remove the padding on smaller screens */
+  }
+
+  .content {
+    padding-left: 15px; /* Add some padding for better content visibility on smaller screens */
+  }
+}
+  

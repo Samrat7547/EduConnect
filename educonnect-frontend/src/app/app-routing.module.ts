@@ -21,6 +21,8 @@ import { InstructionsComponent } from './pages/user/instructions/instructions.co
 import { StartComponent } from './pages/user/start/start.component';
 import { ViewUserComponent } from './pages/admin/view-user/view-user.component';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
+import { UpdateQuestionComponent } from './pages/admin/update-question/update-question.component';
+import { CategoryQuizComponent } from './pages/admin/category-quiz/category-quiz.component';
 
 // const routes: Routes = [];
 const routes: Routes = [
@@ -72,8 +74,16 @@ const routes: Routes = [
         component: AddQuestionComponent,
       },
       {
+        path: 'question/:quesId/:qid/:title',
+        component: UpdateQuestionComponent
+      },
+      {
         path: 'view-user/:id/:userName/:firstName/:lastName/:email/:phone/:status',
         component: ViewUserComponent,
+      },
+      {
+        path: ':catId', // Then, place the less specific route
+        component: CategoryQuizComponent,
       },
     ],
   },

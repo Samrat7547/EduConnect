@@ -1,28 +1,23 @@
-
- <mat-card class="min-h-screen-80">
-    <mat-list>
-      <!-- <div mat-subheader style="color: red;">All Categories</div> -->
-      <mat-card-title style="color: red; margin-left: 20px; margin-top: 10px;">All Categories</mat-card-title>
-
-      <mat-list-item *ngFor="let c of categories" class="item-wrapper mt20">
-        <div class="category-item">
-          <div class="icon-wrapper">
-            <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
-            <mat-icon>apps</mat-icon>
-          </div>
-          <div class="category-content">
-            <div class="category-title">{{ c.title }}</div>
-            <div class="category-description">{{ c.description }}</div>
-          </div>
-        </div>
-      </mat-list-item>
-    </mat-list>
-
-    <div class="container text-center mt20">
-        <button routerLink="/admin/add-category" mat-button class="button">Add New Category</button>
-    </div>
+<mat-card class="min-h-screen-80">
+  <mat-card class="mt10 light-theme" *ngFor="let q of categories">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{q.title}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{q.description}}</p>
+        </mat-card-content>
+        <mat-card-action>
+          <button [routerLink]="'/admin/' + q.cid" mat-raised-button color="primary" class="ml20" >Quizzes</button> 
+          <!-- <button mat-flat-button color="accent" class="button" > Update</button> -->
+          <!-- <button  mat-flat-button color="primary" class="ml20" > Update</button> -->
+          <button mat-flat-button color="warn" class="ml20" (click)="deleteCategory(q.cid)" > Delete</button>
+         
+          
+        </mat-card-action>
   </mat-card>
   
-  
-  
-  
+  <div class="container text-center mt20">
+    <button routerLink="/admin/add-category" mat-button class="button">Add New Category</button>
+</div>
+  </mat-card>
