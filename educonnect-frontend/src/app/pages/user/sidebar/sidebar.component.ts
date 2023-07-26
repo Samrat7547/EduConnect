@@ -5,27 +5,21 @@ import { CategoryService } from 'src/app/services/category/category.service';
 @Component({
   selector: 'app-sidebar-user',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
 })
-export class SidebarComponent implements OnInit{
-  
-  categories!:any;
-  constructor(private _cat:CategoryService, private toastr:ToastrService){
-
-  }
+export class SidebarComponent implements OnInit {
+  categories!: any;
+  constructor(private _cat: CategoryService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
-
     this._cat.categories().subscribe(
-      (data:any)=>{
-       this.categories=data;
+      (data: any) => {
+        this.categories = data;
       },
-      (error)=>{
+      (error) => {
         console.log(error);
-        this.toastr.error('Error!!','Server error');
+        this.toastr.error('Error!!', 'Server error');
       }
-    )
-    
+    );
   }
-
 }

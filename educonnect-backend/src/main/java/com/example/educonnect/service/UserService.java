@@ -1,6 +1,6 @@
 package com.example.educonnect.service;
 
-import com.example.educonnect.wrapper.UserWrapper;
+import com.example.educonnect.model.User;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -17,7 +17,9 @@ public interface UserService {
 
 //    ResponseEntity<UserWrapper> getSingleUser(String userName);
 
-    ResponseEntity<List<UserWrapper>> getAllUser();
+//    ResponseEntity<List<UserWrapper>> getAllUser();
+
+    public List<User> getAllUser();
 
     ResponseEntity<String> updateStatus(Map<String, String> requestMap);
 

@@ -19,7 +19,8 @@ import { AddQuestionComponent } from './pages/admin/add-question/add-question.co
 import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
 import { InstructionsComponent } from './pages/user/instructions/instructions.component';
 import { StartComponent } from './pages/user/start/start.component';
-
+import { ViewUserComponent } from './pages/admin/view-user/view-user.component';
+import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 
 // const routes: Routes = [];
 const routes: Routes = [
@@ -28,74 +29,83 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  {path: 'admin', 
-  component: DashboardComponent , 
-  canActivate : [AdminGuard],
-  children:[
-    {
-      path:'',
-      component:WelcomeComponent
-    },
-    {
-      path:'profile',
-      component:ProfileComponent
-    },
-    {
-      path:'categories',
-      component:ViewCategoriesComponent
-    },
-    
-    {
-      path:'add-category',
-      component:AddCategoryComponent
-    },
-    {
-      path:'quizzes',
-      component:ViewQuizzesComponent
-    },
-    {
-      path:'add-quiz',
-      component:AddQuizComponent
-    },
-    {
-      path:'quiz/:qid',
-      component:UpdateQuizComponent
-    },
-    {
-      path:'view-questions/:qid/:title',
-      component:ViewQuizQuestionsComponent
-    },
-    {
-      path:'add-question/:qid/:title',
-      component:AddQuestionComponent
-    },
-  ]
-},
-  { path: 'user-dashboard', component: UserDashboardComponent , canActivate: [NormalGuard],
-  children:[
-    {
-      path:':catId',
-      component:LoadQuizComponent
-    },
-    {
-      path:'instructions/:qid',
-      component:InstructionsComponent
-    },
-    
-    
-    
-  ]
-},
-{
-  path:'start/:qid',
-  component:StartComponent,
-  canActivate: [NormalGuard]
-},
+  {
+    path: 'admin',
+    component: DashboardComponent,
+    canActivate: [AdminGuard],
+    children: [
+      {
+        path: '',
+        component: WelcomeComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+      },
+      {
+        path: 'categories',
+        component: ViewCategoriesComponent,
+      },
 
-]
+      {
+        path: 'add-category',
+        component: AddCategoryComponent,
+      },
+      {
+        path: 'quizzes',
+        component: ViewQuizzesComponent,
+      },
+      {
+        path: 'add-quiz',
+        component: AddQuizComponent,
+      },
+      {
+        path: 'quiz/:qid',
+        component: UpdateQuizComponent,
+      },
+      {
+        path: 'view-questions/:qid/:title',
+        component: ViewQuizQuestionsComponent,
+      },
+      {
+        path: 'add-question/:qid/:title',
+        component: AddQuestionComponent,
+      },
+      {
+        path: 'view-user/:id/:userName/:firstName/:lastName/:email/:phone/:status',
+        component: ViewUserComponent,
+      },
+    ],
+  },
+  {
+    path: 'user-dashboard',
+    component: UserDashboardComponent,
+    canActivate: [NormalGuard],
+    children: [
+      {
+        path: 'user-profile', // Place the more specific route first
+        component: UserProfileComponent,
+      },
+      {
+        path: ':catId', // Then, place the less specific route
+        component: LoadQuizComponent,
+      },
+      {
+        path: 'instructions/:qid',
+        component: InstructionsComponent,
+      },
+    ],
+  },
+  
+  {
+    path: 'start/:qid',
+    component: StartComponent,
+    canActivate: [NormalGuard],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

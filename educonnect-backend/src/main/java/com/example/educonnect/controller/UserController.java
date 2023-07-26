@@ -1,5 +1,7 @@
 package com.example.educonnect.controller;
 
+import com.example.educonnect.model.Category;
+import com.example.educonnect.model.User;
 import com.example.educonnect.wrapper.UserWrapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +23,12 @@ public interface UserController {
 //    @GetMapping("/{userName}")
 //    public ResponseEntity<UserWrapper> getSingleUser(@PathVariable String userName);
 
-    @CrossOrigin
-    @GetMapping("/allUser")
-    public ResponseEntity<List<UserWrapper>> getAllUsers();
+//    @CrossOrigin
+//    @GetMapping("/allUser")
+//    public ResponseEntity<List<UserWrapper>> getAllUsers();
+
+    @GetMapping(path = "/allUser")
+    public List<User> getAllUsers();
 
     @GetMapping("/userDetails")
     public ResponseEntity<Optional> getCurrentUser();

@@ -54,4 +54,21 @@ export class AuthService {
       },
     });
   }
+
+  getAllUsers(): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(`http://localhost:8080/user/allUser`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+  public deleteUser(Id: any){
+    const token = localStorage.getItem('token');
+    return this.http.delete(`${this.baseUrl}/delete/${Id}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
 }

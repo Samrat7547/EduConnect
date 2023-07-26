@@ -1,6 +1,8 @@
 package com.example.educonnect.controllerImpl;
 
 import com.example.educonnect.controller.UserController;
+import com.example.educonnect.model.Category;
+import com.example.educonnect.model.User;
 import com.example.educonnect.service.UserService;
 import com.example.educonnect.wrapper.UserWrapper;
 import lombok.RequiredArgsConstructor;
@@ -50,15 +52,20 @@ public class UserControllerImpl implements UserController {
 //        return new ResponseEntity<>("Something went wrong",HttpStatus.INTERNAL_SERVER_ERROR);
 //    }
 
-    @CrossOrigin
+//    @CrossOrigin
+//    @Override
+//    public ResponseEntity<List<UserWrapper>> getAllUsers() {
+//        try{
+//            return userService.getAllUser();
+//        }catch(Exception ex){
+//            ex.printStackTrace();
+//        }
+//        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+
     @Override
-    public ResponseEntity<List<UserWrapper>> getAllUsers() {
-        try{
-            return userService.getAllUser();
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
+    public List<User> getAllUsers() {
+        return this.userService.getAllUser();
     }
 
     @Override

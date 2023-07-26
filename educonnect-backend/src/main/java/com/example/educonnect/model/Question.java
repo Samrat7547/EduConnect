@@ -1,5 +1,6 @@
 package com.example.educonnect.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
@@ -24,7 +25,11 @@ public class Question {
     private String option3;
     private String option4;
 
+
     private String answer;
+
+    @Transient
+    private String givenAnswer;
 
 
     @ManyToOne(fetch = FetchType.EAGER)

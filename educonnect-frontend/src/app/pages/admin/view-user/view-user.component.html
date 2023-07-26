@@ -1,0 +1,23 @@
+<!-- viewuser.component.html -->
+<!-- <h2>User Details</h2>
+<p>ID: {{ data.id }}</p>
+<p>User Name: {{ data.userName }}</p>
+<p>First Name: {{ data.firstName }}</p>
+<p>Last Name: {{ data.lastName }}</p>
+<p>Email: {{ data.email }}</p>
+<p>Phone: {{ data.phone }}</p>
+<p>Status: {{ data.status }}</p> -->
+
+<!-- viewuser.component.html -->
+<mat-card class="user-card">
+    <h2>User Details</h2>
+    <p><strong>ID:</strong> {{ data.id }}</p>
+    <p><strong>User Name:</strong> {{ data.userName }}</p>
+    <p><strong>First Name:</strong> {{ data.firstName }}</p>
+    <p><strong>Last Name:</strong> {{ data.lastName }}</p>
+    <p><strong>Email:</strong> {{ data.email }}</p>
+    <p><strong>Phone:</strong> {{ data.phone }}</p>
+    <p><strong>Status:</strong> {{ data.status }}</p>
+    <button mat-raised-button color="primary" (click)="closeDialog()">Close</button>
+  </mat-card>
+  
