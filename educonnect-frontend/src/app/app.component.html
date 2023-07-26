@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="!isStartComponent"></app-navbar>
 <div class="pt-[96px]">
     <router-outlet></router-outlet>
 </div>

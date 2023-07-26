@@ -6,7 +6,6 @@ import com.example.educonnect.jwt.JwtUtil;
 import com.example.educonnect.model.User;
 import com.example.educonnect.repo.UserRepository;
 import com.example.educonnect.service.UserService;
-import com.example.educonnect.wrapper.UserWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,17 +144,32 @@ public class UserServiceImpl implements UserService {
 //        return null;
 //    }
 
+//    @Override
+//    public ResponseEntity<List<UserWrapper>> getAllUser() {
+//        try{
+//            if(jwtFilter.isAdmin()){
+////                return new ResponseEntity<>(userRepo.getAllUser(),HttpStatus.OK);
+//                return new ResponseEntity<>(userRepo.getAllUser(),HttpStatus.OK);
+//            }else
+//                return new ResponseEntity<>(userRepo.getByUsername(jwtFilter.getCurrentUser()),HttpStatus.OK);
+//        }catch(Exception ex){
+//            ex.printStackTrace();
+//        }
+//        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+
     @Override
-    public ResponseEntity<List<UserWrapper>> getAllUser() {
-        try{
+    public List<User> getAllUser() {
+        
+//        return this.userRepo.findAll();
+
             if(jwtFilter.isAdmin()){
-                return new ResponseEntity<>(userRepo.getAllUser(),HttpStatus.OK);
-            }else
-                return new ResponseEntity<>(userRepo.getByUsername(jwtFilter.getCurrentUser()),HttpStatus.OK);
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
+//                return new ResponseEntity<>(userRepo.getAllUser(),HttpStatus.OK);
+                return this.userRepo.getAllUser();
+            }
+//                return new ResponseEntity<>(userRepo.getByUsername(jwtFilter.getCurrentUser()),HttpStatus.OK);
+
+        return  this.userRepo.getByUsername(jwtFilter.getCurrentUser());
     }
 
     @Override

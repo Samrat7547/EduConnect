@@ -31,6 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -47,6 +48,9 @@ import { AddQuestionComponent } from './pages/admin/add-question/add-question.co
 import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
 import { InstructionsComponent } from './pages/user/instructions/instructions.component';
 import { StartComponent } from './pages/user/start/start.component';
+import { ViewUserComponent } from './pages/admin/view-user/view-user.component';
+import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
+
 
 
 
@@ -73,7 +77,9 @@ import { StartComponent } from './pages/user/start/start.component';
     LoadQuizComponent,
     InstructionsComponent,
     StartComponent,
-  
+    ViewUserComponent,
+    UserProfileComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -93,6 +99,7 @@ import { StartComponent } from './pages/user/start/start.component';
     CKEditorModule,
     MatDialogModule,
     MatRadioModule,
+    MatProgressSpinnerModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-right',

@@ -1,0 +1,8 @@
+/* your-component.component.css */
+:host {
+  user-select: none; /* Disable text selection */
+}
+
+.overall {
+  cursor: not-allowed;
+}

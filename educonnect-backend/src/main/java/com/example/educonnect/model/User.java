@@ -12,8 +12,10 @@ import java.util.Set;
 @NamedQuery(name="User.findByEmailId",query="select u from User u where u.email=:email")
 @NamedQuery(name="User.updateStatus",query="update User u set u.status=:status where u.id=:id")
 
-@NamedQuery(name="User.getAllUser",query="select new com.example.educonnect.wrapper.UserWrapper(u.id,u.userName,u.password,u.firstName,u.lastName,u.email,u.phone,u.status,u.profile) from User u where u.role='user'")
-@NamedQuery(name="User.getByUsername",query="select new com.example.educonnect.wrapper.UserWrapper(u.id,u.userName,u.password,u.firstName,u.lastName,u.email,u.phone,u.status,u.profile) from User u where u.email=:username")
+//@NamedQuery(name="User.getAllUser",query="select new com.example.educonnect.wrapper.UserWrapper(u.id,u.userName,u.password,u.firstName,u.lastName,u.email,u.phone,u.status,u.profile) from User u where u.role='user'")
+@NamedQuery(name="User.getAllUser",query="select u from User u where u.role='user'")
+//@NamedQuery(name="User.getByUsername",query="select new com.example.educonnect.wrapper.UserWrapper(u.id,u.userName,u.password,u.firstName,u.lastName,u.email,u.phone,u.status,u.profile) from User u where u.email=:username")
+@NamedQuery(name="User.getByUsername",query="select u from User u where u.email=:username")
 @NamedQuery(name="User.getByName",query="select new com.example.educonnect.wrapper.UserWrapper(u.id,u.userName,u.password,u.firstName,u.lastName,u.email,u.phone,u.status,u.profile,u.role) from User u where u.email=:username")
 @Data
 @Entity
@@ -28,6 +30,7 @@ public class User implements Serializable {
     private Integer id;
     @Column(unique = true)
     private String userName;
+    @JsonIgnore
     private String password;
     private String firstName;
     private String lastName;
