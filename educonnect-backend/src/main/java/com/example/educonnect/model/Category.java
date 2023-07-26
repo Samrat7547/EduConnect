@@ -20,6 +20,7 @@ public class Category {
     private Integer cid;
 
     private String title;
+    @Column(length = 5000)
     private String description;
 
 //    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

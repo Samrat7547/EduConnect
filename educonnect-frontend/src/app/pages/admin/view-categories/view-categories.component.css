@@ -1,59 +1,59 @@
-.icon-title-spacing {
-    margin-right: 14px; /* Adjust the spacing as needed */
-  }
-  
-  /* .category-item {
-    display: flex;
-    align-items: center;
-  }
-  
-  
-  .category-title {
-    flex-grow: 1;
-  }*/
-  
-  .category-description {
-    margin-left: auto;
-    color: gray;
-  } 
+.example-header-image {
+  /* background-image: url('https://cdn-icons-png.flaticon.com/128/5678/5678509.png'); */
+  background-image: url("../../../../assets/category.png");
+  background-size: cover;
+}
+.min-h-screen-80 {
+  min-height: 80vh;
+}
 
-  .item-wrapper {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* Adjust the margin as needed */
-  }
-  
-  .category-item {
-    display: flex;
-    align-items: center;
-  }
-  
-  .icon-wrapper {
-    margin-right: 16px; /* Adjust the margin as needed */
-  }
-  
-  .category-content {
-    flex-grow: 1;
-  }
-  .min-h-screen-80 {
-    min-height: 80vh;
-  }
+.button {
+  display: inline-block;
+  padding: 5px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+  background-color: lightgrey;
+  margin-left:1em;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  /* margin-left: ($spacer * .25) !important; */
+}
 
-  .button {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease;
-    background-color: lightgrey;
-  }
-  
-  .button:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    background-color: grey;
-  }
-  
-  /* Rest of your existing styles */
-  
-  
+.button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: grey;
+}
+.mat-card-action {
+   /* margin-top: 10px;  */
+  /* margin-bottom: 10px;  */
+}
+.ml20{
+  margin-left:20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 
+.buttons {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+  background-color: lightgrey;
+  /* margin-left:1em;
+  margin-bottom: 10px; */
+  /* margin-top: 20px; */
+  /* margin-left: ($spacer * .25) !important; */
+}
+
+.buttons:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: grey;
+}
+.light-theme {
+  /* background-color: #f5f5f5; Set the background color to a light shade */
+  /* color: #333333;  */
+  background-color: #F0F8FF;
   
+}

@@ -50,6 +50,8 @@ import { InstructionsComponent } from './pages/user/instructions/instructions.co
 import { StartComponent } from './pages/user/start/start.component';
 import { ViewUserComponent } from './pages/admin/view-user/view-user.component';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
+import { UpdateQuestionComponent } from './pages/admin/update-question/update-question.component';
+import { CategoryQuizComponent } from './pages/admin/category-quiz/category-quiz.component';
 
 
 
@@ -79,6 +81,8 @@ import { UserProfileComponent } from './pages/user/user-profile/user-profile.com
     StartComponent,
     ViewUserComponent,
     UserProfileComponent,
+    UpdateQuestionComponent,
+    CategoryQuizComponent,
     
   ],
   imports: [

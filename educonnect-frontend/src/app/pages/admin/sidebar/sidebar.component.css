@@ -5,6 +5,8 @@
 .custom-theme {
     background-color: #f2f2f2;
     color: #333;
+    position: fixed;
+    width: 280px; 
   }
   .min-h-screen-80 {
     min-height: 80vh;

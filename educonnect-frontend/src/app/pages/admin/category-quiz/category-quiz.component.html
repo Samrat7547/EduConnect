@@ -1,9 +1,9 @@
 <div class="bootstrap-wrapper">
     <div class="container-fluid">
-        <mat-card-title style="color: rgb(38, 0, 255); margin-left: 20px; margin-top: 20px;font-size: 20px;">Available Quizzes</mat-card-title>
+        <mat-card-title style="color: rgb(255, 0, 17); margin-left: 20px; margin-top: 20px;font-size: 20px;">Available Quizzes</mat-card-title>
         <div class="row mt20" *ngIf="quizzes">
             
-            <div class="col-md-4 mt20" *ngFor="let q of quizzes">
+            <div class="col-md-12 mt20" *ngFor="let q of quizzes">
                    <!-- <h3>{{q.title}}</h3> -->
 
                    <mat-card >
@@ -19,12 +19,15 @@
                         <p class="truncate">{{q.description}}</p>
                     </mat-card-content>
                     <mat-card-action >
-                        <!-- <button class="ml20 mb20 mt10" mat-raised-button color="primary">View</button> -->
-                        <!-- <button mat-button (click)="openDialog()">Open dialog</button> -->
-                        <!-- <button class="ml20 mb20 mt10"  [routerLink]="'/user-dashboard/instructions/'+ q.qid" mat-raised-button color="accent">Start</button> -->
-                        <button class="ml20 mb20 mt10" (click)="openDialog(q.qid)"  mat-raised-button color="accent"  >Start</button>
-                        <button class="ml20 mb20 mt10" mat-stroked-button color="warn">Questions :{{q.numberOfQuestions}}</button>
-                        <button class="ml20 mb20 mt10" mat-stroked-button color="warn">Marks :{{q.maxMarks}}</button>
+                       
+                        <button mat-raised-button [routerLink]="'/admin/view-questions/'+q.qid+'/'+q.title" color="accent" class="ml20" >Questions</button> 
+        <!-- <button mat-flat-button color="accent" class="button" > Update</button> -->
+        <button [routerLink]="'/admin/quiz/'+q.qid" mat-flat-button color="primary" class="ml20" > Update</button>
+        <button mat-flat-button color="warn" class="ml20" (click)="deleteQuiz(q.qid)" > Delete</button>
+        <button mat-stroked-button color="accent" class="ml20" > Max Marks {{q.maxMarks}}</button>
+         <button mat-stroked-button color="accent" class="ml20" > Questions {{q.numberOfQuestions}}</button>
+        <button mat-stroked-button color="accent" class="ml20" > Attempts</button>
+        <button mat-stroked-button *ngIf="q.active" color="accent" class="ml20" > Active</button>
                     </mat-card-action>
                    </mat-card>
             </div>
@@ -39,3 +42,4 @@
         </div>
     </div>
 </div>
+

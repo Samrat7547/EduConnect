@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from 'src/app/services/category/category.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-categories',
@@ -8,6 +11,7 @@ import { CategoryService } from 'src/app/services/category/category.service';
   
 })
 export class ViewCategoriesComponent implements OnInit {
+
    categories!:any;
 
   // categories=[
@@ -28,9 +32,9 @@ export class ViewCategoriesComponent implements OnInit {
   //   }
   // ]
 
-  constructor( private category:CategoryService){}
+  constructor( private _category:CategoryService,private toastr: ToastrService,private router:Router){}
  ngOnInit(): void {
-    this.category.categories().subscribe((data:any)=>{
+    this._category.categories().subscribe((data:any)=>{
       this.categories=data;
       console.log(this.categories);
       
@@ -38,6 +42,30 @@ export class ViewCategoriesComponent implements OnInit {
     (error)=>{
       console.log(error);
       
+    })
+  }
+
+  deleteCategory(cId: any){
+    // alert(qId);
+    Swal.fire({
+      icon:"warning",
+      title:"Do you want to delete?",
+      confirmButtonText:"Delete",
+      showCancelButton:true,
+    }).then((result)=>{
+      if(result.isConfirmed){
+        //delete
+        this._category.deleteCategory(cId).subscribe(
+          (data:any)=>{
+            this.categories=this.categories.filter((category:any)=>category.cid!=cId)
+            this.toastr.success('Success!','Quiz deleted successfully');
+          },
+          (error)=>{
+            console.log(error);
+            this.toastr.error('Error','Error in deleting quiz');
+          }
+        );
+      }
     })
   }
 
