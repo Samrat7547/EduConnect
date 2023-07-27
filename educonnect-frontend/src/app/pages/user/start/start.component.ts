@@ -24,6 +24,7 @@ const SESSION_TIMEOUT_MS = 60 * 5 * 1000;
   styleUrls: ['./start.component.css'],
   encapsulation: ViewEncapsulation.None, // Apply the component's CSS globally
 })
+
 // export class StartComponent implements OnInit {
 //   qid!: any;
 //   questions!: any;
@@ -244,9 +245,9 @@ export class StartComponent implements OnInit {
   private sessionTimer: any;
   isQuizSubmitted = false;
   @ViewChild('resultCard') resultCard!: ElementRef;
- 
-
+  
   isResultActive = false;
+  showResults = false; // Initially, set it to false
 
 
   constructor(
@@ -257,6 +258,7 @@ export class StartComponent implements OnInit {
     private toastr: ToastrService,
     private _route: ActivatedRoute,
     private question: QuestionService,
+    
     
   ) {}
 
@@ -348,6 +350,9 @@ export class StartComponent implements OnInit {
     if (this.isSubmit) {
       this.isResultActive = true;
     }
+
+  
+
   }
 
   
@@ -409,6 +414,7 @@ export class StartComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         // Swal.fire('Get Ready for the Test', '', 'success')
+        
         //calculation part
         
         this.canRefresh = false;
