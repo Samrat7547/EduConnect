@@ -1,4 +1,4 @@
-<div class="bootstrap-wrapper overall" *ngIf="!isSubmit" appFullScreen>
+<div class="bootstrap-wrapper overall" *ngIf="!isSubmit" >
     <div class="container-fluid">
        <div class="row">
         <div class="col-md-2 fixed-column">
@@ -18,12 +18,13 @@
                     <ul class="mt10 ml20">
                         <li class="mt10"> <b>1)</b> You are monitored every second, so dont navigate to other window or else you will be <b>Logged out</b>.</li>
                         <li class="mt10"> <b>2)</b> Dont Refresh the Page or else you will be <b>Logged out</b>.</li>
-                        <li class="mt10"> <b>3)</b> Read all questions carefully.</li>
-                        <li class="mt10"> <b>4)</b> Submit quiz within the time.</li>
-                        <li class="mt10"> <b>5)</b> There are total <b>{{this.questions.length}} questions</b>.
+                        <li class="mt10"> <b>2)</b> Dont press the ESC button or else you will be <b>Logged out</b>.</li>
+                        <li class="mt10"> <b>4)</b> Read all questions carefully.</li>
+                        <li class="mt10"> <b>5)</b> Submit quiz within the time.</li>
+                        <li class="mt10"> <b>6)</b> There are total <b>{{this.questions.length}} questions</b>.
                              </li>
-                        <li class="mt10"> <b>6)</b> All questions is of MCQ types.</li>
-                        <li class="mt10"> <b>7)</b> Click on the screen atleast once in 5 mins or will be logged out for remaining inactive.</li>
+                        <li class="mt10"> <b>7)</b> All questions is of MCQ types.</li>
+                        <li class="mt10"> <b>8)</b> Click on the screen atleast once in 5 mins or will be logged out for remaining inactive.</li>
                     </ul>
                     
                 </mat-card-content>
@@ -109,7 +110,7 @@
                     <mat-spinner 
                     color="accent"
                     mode="determinate"
-                    [value]="(timer/(this.questions.length * 2 * 60)) * 100"
+                    [value]="(timer/(this.questions.length * 1 * 60)) * 100"
                     style="margin: auto; margin-top: 20px;"></mat-spinner>
                 </mat-card-content>
             </mat-card>
@@ -122,7 +123,8 @@
 
 <!-- showing results -->
 
-<div class="bootstrap-wrapper mt20"  *ngIf="isSubmit">
+<div  class="bootstrap-wrapper mt20"  *ngIf="isSubmit">
+   
     <div class="row mt20">
         <div class="col-md-6 offset-md-3">
             <mat-card style="background-color: bisque;">
@@ -152,7 +154,8 @@
 
                 <mat-actions class="text-center mt20 mb10">
                     <button  (click)="printPage()" mat-raised-button color="primary">Print</button>
-                    <button routerLink="/home" mat-raised-button color="accent" class="ml10">Home</button>
+                    <!-- <button routerLink="/home" mat-raised-button color="accent" class="ml10">Home</button> -->
+                    <button (click)="navigateHome()" mat-raised-button color="accent" class="ml10">Home</button>
                 </mat-actions>
             </mat-card>
 

@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class InstructionsComponent implements OnInit{
   // qid!:any;
   quiz!:any;
+  private allowEscKey = true;
 
   // constructor(private _route:ActivatedRoute, private _quiz:QuizService, private toastr:ToastrService){}
   constructor(private _route:ActivatedRoute, private _quiz:QuizService, private toastr:ToastrService,
@@ -62,6 +63,7 @@ export class InstructionsComponent implements OnInit{
   //   )
     
   // }
+  
 
   startTest(){
     Swal.fire({
@@ -77,6 +79,15 @@ export class InstructionsComponent implements OnInit{
         // Swal.fire('Get Ready for the Test', '', 'success')
        
         this.router.navigate(['/start/'+this.qid]);
+
+
+       
+
+    // Call the browser's full-screen API here to enter full-screen mode
+    const element = document.documentElement;
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    }
        
       } else if (result.isDenied) {
         Swal.fire('Changes are not saved', '', 'info')

@@ -23,6 +23,10 @@ export class HomeComponent implements OnInit{
       this.userDetails = userDetails;
     });
     // console.log(this.userDetails);
+
+
+    // Check if the document is in full-screen mode and exit if necessary
+    this.exitFullScreen();
   }
   isAuthenticated() {
     return this.authService.isAuthenticated();
@@ -38,5 +42,13 @@ export class HomeComponent implements OnInit{
 
   getRole() {
     return this.authService.getRole();
+  }
+
+  exitFullScreen() {
+    if (document.fullscreenElement) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } 
+    }
   }
 }
