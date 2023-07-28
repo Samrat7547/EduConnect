@@ -12,6 +12,27 @@
   height: 100vh; /* Adjust the height to your preference */
   overflow-y: auto;
 }
+/* Add these styles to ensure proper positioning of the fixed video container */
+.container-fluid {
+  position: relative;
+}
+
+.fixed-video-container {
+  position: fixed;
+  top: 450px; 
+  right: 20px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 9999; 
+}
+/* Add this to your component's CSS */
+.hide-recording {
+  display: none;
+}
+
+
 
 
 

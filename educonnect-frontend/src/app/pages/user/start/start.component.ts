@@ -24,10 +24,6 @@ const SESSION_TIMEOUT_MS = 60 * 5 * 1000;
   styleUrls: ['./start.component.css'],
   encapsulation: ViewEncapsulation.None, // Apply the component's CSS globally
 })
-
-
-
-
 export class StartComponent implements OnInit {
   qid!: any;
   questions!: any;
@@ -44,10 +40,20 @@ export class StartComponent implements OnInit {
   private sessionTimer: any;
   isQuizSubmitted = false;
   @ViewChild('resultCard') resultCard!: ElementRef;
-  
+
   isResultActive = false;
   showResults = false; // Initially, set it to false
 
+  //
+  //camera details
+  showLiveRecording = true;
+  @ViewChild('videoElement', { static: true }) videoElement!: ElementRef;
+  private stream!: MediaStream;
+  public examStarted: boolean = false;
+
+  
+
+  //
 
   constructor(
     private locationSt: LocationStrategy,
@@ -56,9 +62,7 @@ export class StartComponent implements OnInit {
     private sharedDataService: ShareddataService,
     private toastr: ToastrService,
     private _route: ActivatedRoute,
-    private question: QuestionService,
-    
-    
+    private question: QuestionService
   ) {}
 
   @HostListener('window:beforeunload', ['$event'])
@@ -137,6 +141,8 @@ export class StartComponent implements OnInit {
     this.loadQuestions();
     // this.startTimer();
 
+    this.setupCamera();
+
     // const storedTimer = localStorage.getItem('timer');
     // if (storedTimer) {
     //   this.timer = parseInt(storedTimer, 10);
@@ -149,14 +155,33 @@ export class StartComponent implements OnInit {
     if (this.isSubmit) {
       this.isResultActive = true;
     }
+  }
 
+  //camera
+  async setupCamera() {
+    try {
+      this.stream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+      // Attach the video stream to the video element
+      const video = this.videoElement.nativeElement;
+      video.srcObject = this.stream;
+    } catch (err) {
+      console.error('Error accessing camera:', err);
+    }
+  }
   
 
+
+  stopCamera() {
+    if (this.stream) {
+      this.stream.getTracks().forEach((track) => track.stop());
+    }
   }
 
   
   
-  
+
+  //
 
   exitFullScreenHandler() {
     if (!document.fullscreenElement && !this.isQuizSubmitted) {
@@ -213,9 +238,24 @@ export class StartComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         // Swal.fire('Get Ready for the Test', '', 'success')
-        
+
+        //camera
+        this.stopCamera();
+
+        const videoElement = this.videoElement.nativeElement;
+        if (videoElement && videoElement.srcObject) {
+          const tracks = videoElement.srcObject.getTracks();
+          tracks.forEach((track: { stop: () => any }) => track.stop());
+          videoElement.srcObject = null;
+        }
+
+        this.showLiveRecording = false;
+       
+
+        //
+
         //calculation part
-        
+
         this.canRefresh = false;
 
         this.evalQuiz();
