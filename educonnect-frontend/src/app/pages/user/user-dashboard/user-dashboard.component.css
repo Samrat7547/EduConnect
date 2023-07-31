@@ -1,7 +1,39 @@
 .custom-theme {
-    background-color: #FFD1DC;
-    color: #333;
+  background-color: #FFD1DC;
+  color: #333;
+}
+
+.min-h-screen-80 {
+  min-height: 90vh;
+}
+
+.bootstrap-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sidebar {
+  flex: 0 0 16.666667%; /* Equivalent to col-md-2 */
+  max-width: 16.666667%; /* Equivalent to col-md-2 */
+  position: fixed;
+ 
+}
+
+.main-content {
+  flex: 0 0 83.333333%; /* Equivalent to col-md-10 */
+  max-width: 83.333333%; /* Equivalent to col-md-10 */
+  margin-left: 16.666667%; /* Equivalent to col-md-2 */
+}
+
+@media (max-width: 991.98px) {
+  .sidebar {
+      position: static;
+      max-width: 100%;
   }
-  .min-h-screen-80 {
-    min-height: 90vh;
+
+  .main-content {
+      margin-left: 0;
+      flex-basis: 100%;
+      max-width: 100%;
   }
+}
