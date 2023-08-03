@@ -69,7 +69,7 @@ export class ViewQuizzesComponent implements OnInit{
           },
           (error)=>{
             console.log(error);
-            this.toastr.error('Error','Error in deleting quiz');
+            this.toastr.error('Error','Delete all its questions first');
           }
         );
       }
