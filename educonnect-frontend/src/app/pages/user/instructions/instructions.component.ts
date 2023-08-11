@@ -9,37 +9,35 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-instructions',
   templateUrl: './instructions.component.html',
-  styleUrls: ['./instructions.component.css']
+  styleUrls: ['./instructions.component.css'],
 })
-export class InstructionsComponent implements OnInit{
+export class InstructionsComponent implements OnInit {
   // qid!:any;
-  quiz!:any;
+  quiz!: any;
   private allowEscKey = true;
 
   // constructor(private _route:ActivatedRoute, private _quiz:QuizService, private toastr:ToastrService){}
-  constructor(private _route:ActivatedRoute, private _quiz:QuizService, private toastr:ToastrService,
-    private router:Router ,
-    @Inject(MAT_DIALOG_DATA) public qid: any){
-      console.log('Received qid in InstructionsComponent:', qid);
-    }
+  constructor(
+    private _route: ActivatedRoute,
+    private _quiz: QuizService,
+    private toastr: ToastrService,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public qid: any
+  ) {
+    console.log('Received qid in InstructionsComponent:', qid);
+  }
 
-
-    
   ngOnInit(): void {
-
     this._quiz.getQuiz(this.qid).subscribe(
-          (data:any)=>{
-            console.log(data);
-            this.quiz=data;
-            
-          },
-          (error)=>{
-            console.log(error);
-            this.toastr.error('Error!!','Error in Loading');
-            
-          }
-        )
-   
+      (data: any) => {
+        console.log(data);
+        this.quiz = data;
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error('Error!!', 'Error in Loading');
+      }
+    );
   }
 
   // constructor(@Inject(MAT_DIALOG_DATA) public qid: any) {
@@ -53,46 +51,40 @@ export class InstructionsComponent implements OnInit{
   //     (data:any)=>{
   //       console.log(data);
   //       this.quiz=data;
-        
+
   //     },
   //     (error)=>{
   //       console.log(error);
   //       this.toastr.error('Error!!','Error in Loading');
-        
+
   //     }
   //   )
-    
-  // }
-  
 
-  startTest(){
+  // }
+
+  startTest() {
     Swal.fire({
       title: 'Do you want to start the Test?',
       // showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: 'Start',
       // denyButtonText: `Don't save`,
-      icon:'info'
+      icon: 'info',
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         // Swal.fire('Get Ready for the Test', '', 'success')
-       
-        this.router.navigate(['/start/'+this.qid]);
 
+        this.router.navigate(['/start/' + this.qid]);
 
-       
-
-    // Call the browser's full-screen API here to enter full-screen mode
-    const element = document.documentElement;
-    if (element.requestFullscreen) {
-      element.requestFullscreen();
-    }
-       
+        // Call the browser's full-screen API here to enter full-screen mode
+        const element = document.documentElement;
+        if (element.requestFullscreen) {
+          element.requestFullscreen();
+        }
       } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info')
+        Swal.fire('Changes are not saved', '', 'info');
       }
-    })
+    });
   }
-
 }

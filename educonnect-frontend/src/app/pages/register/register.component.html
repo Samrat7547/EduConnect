@@ -8,13 +8,13 @@
   "
 >
   <div
-    class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0"
+    class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 min-h-screen"
   >
     <button
       (click)="goToHome()"
       class="cursor-pointer flex items-center mb-6 text-3xl font-semibold text-white"
     >
-      <i class=" mr-4 mt-2"></i>
+      <i class="mr-4 mt-2"></i>
       <!-- <i class="fas fa-coffee mr-4 mt-2"></i> -->
 
       <span
@@ -158,9 +158,7 @@
           </div>
 
           <div>
-            <label
-              for="phone"
-              class="block mb-1 text-sm font-medium text-white"
+            <label for="phone" class="block mb-1 text-sm font-medium text-white"
               >Phone</label
             >
             <input
@@ -209,7 +207,7 @@
             Create an account
           </button>
           <!-- <p class="text-sm font-light text-gray-500 dark:text-gray-400"> -->
-            <p class="text-sm font-light text-black-200">
+          <p class="text-sm font-light text-black-200">
             Already have an account?
             <button
               routerLink="/login"

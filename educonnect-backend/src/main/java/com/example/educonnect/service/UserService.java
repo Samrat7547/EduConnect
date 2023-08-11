@@ -13,11 +13,9 @@ public interface UserService {
     //public User createUser(User user, Set<UserRole> userRoles);
 
     ResponseEntity<String> signup(Map<String, String> requestMap);
+
     ResponseEntity<String> login(Map<String, String> requestMap);
 
-//    ResponseEntity<UserWrapper> getSingleUser(String userName);
-
-//    ResponseEntity<List<UserWrapper>> getAllUser();
 
     public List<User> getAllUser();
 

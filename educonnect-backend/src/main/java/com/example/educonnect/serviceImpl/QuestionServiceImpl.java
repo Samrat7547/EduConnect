@@ -48,8 +48,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void deleteQuestion(Integer quesId) {
-    Question question= new Question();
-    question.setQuesId(quesId);
-    this.questionRepo.delete(question);
+        Question question = new Question();
+        question.setQuesId(quesId);
+        this.questionRepo.delete(question);
     }
 }

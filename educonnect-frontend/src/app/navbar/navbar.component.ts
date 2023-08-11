@@ -11,7 +11,7 @@ import { ShareddataService } from 'src/app/services/sharedData/shared-data.servi
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  userDetails!: any ;
+  userDetails!: any;
   constructor(
     private sharedDataService: ShareddataService,
     private authService: AuthService,

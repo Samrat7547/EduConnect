@@ -16,18 +16,19 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Slf4j
 public class CustomerUserDetailsService implements UserDetailsService {
-    private  final UserRepository userRepo;
+    private final UserRepository userRepo;
     private User userDetail;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("Inside loadUserByUsername {}",username);
-        userDetail=userRepo.findByEmailId(username);
-        if(!Objects.isNull(userDetail))
-            return  new org.springframework.security.core.userdetails.User(userDetail.getEmail(),userDetail.getPassword()
-                    ,new ArrayList<>());//The User used is pre-built one.userDetail is the database one.
-        else  throw  new UsernameNotFoundException("User not found");
+        log.info("Inside loadUserByUsername {}", username);
+        userDetail = userRepo.findByEmail(username);
+        if (!Objects.isNull(userDetail))
+            return new org.springframework.security.core.userdetails.User(userDetail.getEmail(), userDetail.getPassword(), new ArrayList<>());//The User used is pre-built one.userDetail is the database one.
+        else throw new UsernameNotFoundException("User not found");
     }
-    public User getUserDetail(){
+
+    public User getUserDetail() {
         return userDetail;
     }
 }

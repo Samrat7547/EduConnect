@@ -7,10 +7,10 @@ import { ShareddataService } from 'src/app/services/sharedData/shared-data.servi
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit{
-  userDetails!: any ;
+export class HomeComponent implements OnInit {
+  userDetails!: any;
   constructor(
     private sharedDataService: ShareddataService,
     private authService: AuthService,
@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit{
       this.userDetails = userDetails;
     });
     // console.log(this.userDetails);
-
 
     // Check if the document is in full-screen mode and exit if necessary
     this.exitFullScreen();
@@ -48,7 +47,7 @@ export class HomeComponent implements OnInit{
     if (document.fullscreenElement) {
       if (document.exitFullscreen) {
         document.exitFullscreen();
-      } 
+      }
     }
   }
 }

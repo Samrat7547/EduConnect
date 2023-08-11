@@ -1,45 +1,46 @@
 package com.example.educonnect.controllerImpl;
 
-import com.example.educonnect.controller.CategoryController;
+
 import com.example.educonnect.model.Category;
 import com.example.educonnect.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @CrossOrigin
+@RequestMapping(path = "/category")
+@RequiredArgsConstructor
 @RestController
-public class CategoryControllerImpl implements CategoryController {
+public class CategoryControllerImpl{
+    @Autowired
+    CategoryService categoryService;
 
-    private final CategoryService categoryService;
-
-    @Override
-    public ResponseEntity<Category> addCategory(Category category) {
-       Category category1 = this.categoryService.addCategory(category);
-       return ResponseEntity.ok(category1);
+    @PostMapping(path= "/add")
+    public ResponseEntity<Category> addCategory(@RequestBody Category category) {
+        Category category1 = this.categoryService.addCategory(category);
+        return ResponseEntity.ok(category1);
     }
 
-    @Override
-    public Category getCategory(Integer cid) {
+    @GetMapping(path = "/{cid}")
+    public Category getCategory (@PathVariable("cid") Integer cid) {
         return this.categoryService.getCategory(cid);
     }
 
-    @Override
+    @GetMapping(path = "/allCategory")
     public List<Category> getCategories() {
         return this.categoryService.getCategories();
     }
 
-    @Override
-    public Category updateCategory(Category category) {
+    @PutMapping(path = "/update")
+    public Category updateCategory(@RequestBody Category category) {
         return this.categoryService.updateCategory(category);
     }
 
-    @Override
-    public void deleteCategory(Integer cid) {
-         this.categoryService.deleteCategory(cid);
+    @DeleteMapping(path = "/{cid}")
+    public  void deleteCategory(@PathVariable("cid") Integer cid) {
+        this.categoryService.deleteCategory(cid);
     }
 }

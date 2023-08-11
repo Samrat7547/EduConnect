@@ -16,41 +16,39 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
     //Extract Token->Compare token username with database username via userDetails->Create an Authentication token->Keep authentication token in SecurityContextHolder
     @Autowired
-    private   JwtUtil jwtUtil;
+    private JwtUtil jwtUtil;
     @Autowired
-    private  CustomerUserDetailsService customerUserDetailsService;
+    private CustomerUserDetailsService customerUserDetailsService;
 
-    private String identity=null;
-    Claims claims=null;
-    private  String username=null;
-
+    private String identity = null;
+    Claims claims = null;
+    private String username = null;
 
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if(request.getServletPath().matches("/user/signup | /user/login")){
-            filterChain.doFilter(request,response);
-        }
-        else {
-            String authorizationHeader=request.getHeader("Authorization");
-            String token= null;
-            if(authorizationHeader!=null && authorizationHeader.startsWith("Bearer ")){
-                token=authorizationHeader.substring(7);
-                username= jwtUtil.extractUsername(token);//Token Username
-                claims= jwtUtil.extractAllClaims(token);
+        if (request.getServletPath().matches("/user/signup | /user/login")) {
+            filterChain.doFilter(request, response);
+        } else {
+            String authorizationHeader = request.getHeader("Authorization");
+            String token = null;
+            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+                token = authorizationHeader.substring(7);
+                username = jwtUtil.extractUsername(token);//Token Username
+                claims = jwtUtil.extractAllClaims(token);
                 identity = username;
             }
-            if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null){
-                UserDetails userDetails= customerUserDetailsService.loadUserByUsername(username);//Database username
-                if(jwtUtil.validateToken(token,userDetails)){
-                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= new UsernamePasswordAuthenticationToken
-                            (userDetails,null,userDetails.getAuthorities());
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = customerUserDetailsService.loadUserByUsername(username);//Database username
+                if (jwtUtil.validateToken(token, userDetails)) {
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
@@ -59,18 +57,21 @@ public class JwtFilter extends OncePerRequestFilter {
 
             }
             username = null;
-            filterChain.doFilter(request,response);
+            filterChain.doFilter(request, response);
 
         }
     }
-    public boolean isAdmin(){
+
+    public boolean isAdmin() {
         return "admin".equalsIgnoreCase((String) claims.get("role"));
     }
-    public boolean isUser(){
+
+    public boolean isUser() {
         return "user".equalsIgnoreCase((String) claims.get("role"));
     }
-    public String getCurrentUser(){
-        log.info("Inside getCurrentUser{}",identity);
+
+    public String getCurrentUser() {
+        log.info("Inside getCurrentUser{}", identity);
 //        return username;
         return identity;
 

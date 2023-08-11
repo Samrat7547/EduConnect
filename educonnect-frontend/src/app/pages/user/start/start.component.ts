@@ -51,8 +51,6 @@ export class StartComponent implements OnInit {
   private stream!: MediaStream;
   public examStarted: boolean = false;
 
-  
-
   //
 
   constructor(
@@ -169,17 +167,12 @@ export class StartComponent implements OnInit {
       console.error('Error accessing camera:', err);
     }
   }
-  
-
 
   stopCamera() {
     if (this.stream) {
       this.stream.getTracks().forEach((track) => track.stop());
     }
   }
-
-  
-  
 
   //
 
@@ -250,7 +243,6 @@ export class StartComponent implements OnInit {
         }
 
         this.showLiveRecording = false;
-       
 
         //
 

@@ -44,10 +44,9 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
 
-    console.log({email, password});
+    console.log({ email, password });
     this.authService.login(email, password).subscribe(
       (response: any) => {
-        
         localStorage.setItem('token', response.token);
         localStorage.setItem('role', response.role);
         // this.sharedDataService.setUserRole(localStorage.getItem('role'));
@@ -58,15 +57,20 @@ export class LoginComponent implements OnInit {
 
             this.sharedDataService.setUserDetails(user);
             this.userDetails = user;
-            if(this.authService.getRole()){
+            if (this.authService.getRole()) {
               //admin dashboard
               this.router.navigate(['/admin']);
-              this.toastr.success('Yay! You are logged in.', 'Admin Login Succesful');
-
-            }else{
+              this.toastr.success(
+                'Yay! You are logged in.',
+                'Admin Login Succesful'
+              );
+            } else {
               //user-dashboard
               this.router.navigate(['/user-dashboard/0']);
-              this.toastr.success('Yay! You are logged in.', 'User Login Succesful');
+              this.toastr.success(
+                'Yay! You are logged in.',
+                'User Login Succesful'
+              );
             }
           },
           (error) => {
@@ -74,10 +78,8 @@ export class LoginComponent implements OnInit {
           }
         );
 
-        
         // this.toastr.success('Yay! You are logged in.', 'Login Succesful');
         // this.router.navigate(['/home']);
-        
       },
       (error) => {
         this.errorMessage = 'Wrong user credentials';

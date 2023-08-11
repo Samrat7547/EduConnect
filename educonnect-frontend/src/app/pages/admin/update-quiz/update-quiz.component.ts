@@ -7,68 +7,63 @@ import { QuizService } from 'src/app/services/quiz/quiz.service';
 @Component({
   selector: 'app-update-quiz',
   templateUrl: './update-quiz.component.html',
-  styleUrls: ['./update-quiz.component.css']
+  styleUrls: ['./update-quiz.component.css'],
 })
-export class UpdateQuizComponent implements OnInit{
-
-  qId=0;
+export class UpdateQuizComponent implements OnInit {
+  qId = 0;
   quiz!: any;
-  categories! : any;
+  categories!: any;
 
-  constructor( private _route:ActivatedRoute,private _quiz:QuizService,private _cat:CategoryService,private toastr: ToastrService,private router: Router){}
+  constructor(
+    private _route: ActivatedRoute,
+    private _quiz: QuizService,
+    private _cat: CategoryService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.qId=this._route.snapshot.params['qid'];
+    this.qId = this._route.snapshot.params['qid'];
     // alert(this.qId);
     this._quiz.getQuiz(this.qId).subscribe(
-      (data:any)=>{
-        this.quiz=data;
+      (data: any) => {
+        this.quiz = data;
         console.log(this.quiz);
-        
       },
-      (error)=>{
+      (error) => {
         console.log(error);
-        
       }
-      
-      );
+    );
 
-      this._cat.categories().subscribe(
-        (data:any)=>{
-          this.categories=data;
-          console.log(this.categories);
-        },
-        (error)=>{
-          console.log(error);
-          this.toastr.error('Error','Error in loading');
-        }
-      );
-      
-    
-
-    
+    this._cat.categories().subscribe(
+      (data: any) => {
+        this.categories = data;
+        console.log(this.categories);
+      },
+      (error) => {
+        console.log(error);
+        this.toastr.error('Error', 'Error in loading');
+      }
+    );
   }
 
-  public updateData(){
+  public updateData() {
     // alert('test');
-     //validate it
+    //validate it
 
-     this._quiz.updateQuiz(this.quiz).subscribe(
-      (data:any)=>
-      {
-        this.toastr.success('Success!!','Updated Successfully');
+    this._quiz.updateQuiz(this.quiz).subscribe(
+      (data: any) => {
+        this.toastr.success('Success!!', 'Updated Successfully');
         // this.router.navigate(['/admin/quizzes']);
         // Add a delay of 2 seconds (adjust the value as needed)
-    setTimeout(() => {
-      this.router.navigate(['/admin/quizzes']);
-    }, 300);
+        setTimeout(() => {
+          this.router.navigate(['/admin/quizzes']);
+        }, 300);
       },
-      (error)=>{
+      (error) => {
         console.log(error);
-          this.toastr.error('Error','Error in updating');
+        this.toastr.error('Error', 'Error in updating');
       }
-      );
-     
+    );
   }
-
 }

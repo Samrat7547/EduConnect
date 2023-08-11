@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name="category")
+@Table(name = "category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,6 @@ public class Category {
 //    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private Set<Quiz> quizzes= new LinkedHashSet<>();
+    private Set<Quiz> quizzes = new LinkedHashSet<>();
 
 }

@@ -61,16 +61,14 @@ export class RegisterComponent implements OnInit {
           console.log('Registration failed!');
           // console.log(error);
           console.log(error.error.text);
-          if (error.error.text==='Successfully Registered'){
+          if (error.error.text === 'Successfully Registered') {
             this.router.navigate(['/login']);
-          this.toastr.success('Please log In', 'Registration successful', {
-            positionClass: 'toast-bottom-right',
-          });
-          }
-          else{
+            this.toastr.success('Please log In', 'Registration successful', {
+              positionClass: 'toast-bottom-right',
+            });
+          } else {
             this.toastr.error('WARNING: Username or Email already exists!');
           }
-          
         }
       );
     } else {

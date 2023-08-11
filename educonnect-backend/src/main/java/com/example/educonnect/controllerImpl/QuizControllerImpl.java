@@ -1,66 +1,66 @@
 package com.example.educonnect.controllerImpl;
 
-import com.example.educonnect.controller.QuizController;
+
 import com.example.educonnect.model.Category;
 import com.example.educonnect.model.Quiz;
 import com.example.educonnect.service.QuizService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @CrossOrigin
 @RestController
-public class QuizControllerImpl implements QuizController {
+@RequestMapping(path = "/quiz")
+public class QuizControllerImpl{
+    @Autowired
+    QuizService quizService;
 
-    private final QuizService quizService;
-
-    @Override
-    public ResponseEntity<Quiz> addQuiz(Quiz quiz) {
+    @PostMapping(path = "/add")
+    public ResponseEntity<Quiz> addQuiz(@RequestBody Quiz quiz) {
         Quiz quiz1 = this.quizService.addQuiz(quiz);
         return ResponseEntity.ok(quiz1);
     }
 
-    @Override
-    public Quiz getQuiz(Integer qId) {
+    @GetMapping(path = "/{qId}")
+    public Quiz getQuiz(@PathVariable("qId") Integer qId) {
         return this.quizService.getQuiz(qId);
     }
 
-    @Override
+    @GetMapping(path = "/allQuiz")
     public List<Quiz> getquizzes() {
         return this.quizService.getquizzes();
     }
 
-    @Override
-    public Quiz updateQuiz(Quiz quiz) {
+    @PutMapping(path = "/update")
+    public Quiz updateQuiz(@RequestBody Quiz quiz) {
         return this.quizService.updateQuiz(quiz);
     }
 
-    @Override
-    public void deleteQuiz(Integer qId) {
+    @DeleteMapping(path = "/{qId}")
+    public void deleteQuiz(@PathVariable("qId") Integer qId) {
         this.quizService.deleteQuiz(qId);
     }
 
-    @Override
-    public List<Quiz> getQuizzesOfCategory(Integer cid) {
+    @GetMapping(path = "/category/{cid}")
+    public List<Quiz> getQuizzesOfCategory(@PathVariable("cid") Integer cid) {
         Category category = new Category();
         category.setCid(cid);
         return this.quizService.getquizzesOfCategory(category);
     }
 
-    @Override
+    @GetMapping(path = "/active")
     public List<Quiz> getActiveQuizzes() {
         return this.quizService.getActiveQuizzes();
     }
 
-    @Override
-    public List<Quiz> getActiveQuizzesOfCategory(Integer cid) {
+    @GetMapping(path = "/category/active/{cid}")
+    public List<Quiz> getActiveQuizzesOfCategory(@PathVariable("cid") Integer cid) {
         Category category = new Category();
         category.setCid(cid);
-        return this. quizService.getActiveQuizzesOfCategory(category);
+        return this.quizService.getActiveQuizzesOfCategory(category);
     }
 }

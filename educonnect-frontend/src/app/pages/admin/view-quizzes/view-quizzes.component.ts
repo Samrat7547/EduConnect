@@ -3,14 +3,13 @@ import { ToastrService } from 'ngx-toastr';
 import { QuizService } from 'src/app/services/quiz/quiz.service';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-view-quizzes',
   templateUrl: './view-quizzes.component.html',
-  styleUrls: ['./view-quizzes.component.css']
+  styleUrls: ['./view-quizzes.component.css'],
 })
-export class ViewQuizzesComponent implements OnInit{
-    quizzes!: any;
+export class ViewQuizzesComponent implements OnInit {
+  quizzes!: any;
 
   // quizzes=[
   //   {
@@ -37,67 +36,41 @@ export class ViewQuizzesComponent implements OnInit{
   //   }
   // ]
 
-  constructor(private _quiz:QuizService, private toastr: ToastrService){}
-  
+  constructor(private _quiz: QuizService, private toastr: ToastrService) {}
+
   ngOnInit(): void {
     this._quiz.quizzes().subscribe(
-      (data:any)=>{
-      this.quizzes=data;
-      console.log(this.quizzes);
-      
-    },
-    (error)=>{
-      console.log(error);
-      
-    })
+      (data: any) => {
+        this.quizzes = data;
+        console.log(this.quizzes);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
-  deleteQuiz(qId: any){
+  deleteQuiz(qId: any) {
     // alert(qId);
     Swal.fire({
-      icon:"warning",
-      title:"Do you want to delete?",
-      confirmButtonText:"Delete",
-      showCancelButton:true,
-    }).then((result)=>{
-      if(result.isConfirmed){
+      icon: 'warning',
+      title: 'Do you want to delete?',
+      confirmButtonText: 'Delete',
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
         //delete
         this._quiz.deleteQuiz(qId).subscribe(
-          (data:any)=>{
-            this.quizzes=this.quizzes.filter((quiz:any)=>quiz.qid!=qId)
-            this.toastr.success('Success!','Quiz deleted successfully');
+          (data: any) => {
+            this.quizzes = this.quizzes.filter((quiz: any) => quiz.qid != qId);
+            this.toastr.success('Success!', 'Quiz deleted successfully');
           },
-          (error)=>{
+          (error) => {
             console.log(error);
-            this.toastr.error('Error','Delete all its questions first');
+            this.toastr.error('Error', 'Delete all its questions first');
           }
         );
       }
-    })
+    });
   }
-
-
-
-
-
-
-  // deleteQuiz(qId: any) {
-  //   const confirmation = confirm('Are you sure you want to delete this quiz?');
-  //   if (confirmation) {
-  //     this._quiz.deleteQuiz(qId).subscribe(
-  //       (data: any) => {
-  //         this.quizzes = this.quizzes.filter((quiz: any) => quiz.qid != qId);
-  //         this.toastr.success('Success!', 'Quiz deleted successfully');
-  //       },
-  //       error => {
-  //         console.log(error);
-  //         this.toastr.error('Error', 'Error in deleting quiz');
-  //       }
-  //     );
-  //   }
-  // }
- 
-  
- 
-
 }

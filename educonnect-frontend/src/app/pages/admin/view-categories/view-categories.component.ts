@@ -8,11 +8,9 @@ import Swal from 'sweetalert2';
   selector: 'app-view-categories',
   templateUrl: './view-categories.component.html',
   styleUrls: ['./view-categories.component.css'],
-  
 })
 export class ViewCategoriesComponent implements OnInit {
-
-   categories!:any;
+  categories!: any;
 
   // categories=[
   //   {
@@ -32,41 +30,46 @@ export class ViewCategoriesComponent implements OnInit {
   //   }
   // ]
 
-  constructor( private _category:CategoryService,private toastr: ToastrService,private router:Router){}
- ngOnInit(): void {
-    this._category.categories().subscribe((data:any)=>{
-      this.categories=data;
-      console.log(this.categories);
-      
-    },
-    (error)=>{
-      console.log(error);
-      
-    })
+  constructor(
+    private _category: CategoryService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
+  ngOnInit(): void {
+    this._category.categories().subscribe(
+      (data: any) => {
+        this.categories = data;
+        console.log(this.categories);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
-  deleteCategory(cId: any){
+  deleteCategory(cId: any) {
     // alert(qId);
     Swal.fire({
-      icon:"warning",
-      title:"Do you want to delete?",
-      confirmButtonText:"Delete",
-      showCancelButton:true,
-    }).then((result)=>{
-      if(result.isConfirmed){
+      icon: 'warning',
+      title: 'Do you want to delete?',
+      confirmButtonText: 'Delete',
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
         //delete
         this._category.deleteCategory(cId).subscribe(
-          (data:any)=>{
-            this.categories=this.categories.filter((category:any)=>category.cid!=cId)
-            this.toastr.success('Success!','Quiz deleted successfully');
+          (data: any) => {
+            this.categories = this.categories.filter(
+              (category: any) => category.cid != cId
+            );
+            this.toastr.success('Success!', 'Quiz deleted successfully');
           },
-          (error)=>{
+          (error) => {
             console.log(error);
-            this.toastr.error('Error','Delete all its quizzes first');
+            this.toastr.error('Error', 'Delete all its quizzes first');
           }
         );
       }
-    })
+    });
   }
-
 }

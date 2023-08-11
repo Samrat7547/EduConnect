@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name="quiz")
+@Table(name = "quiz")
 public class Quiz {
 
     @Id
@@ -26,7 +26,7 @@ public class Quiz {
     private String description;
     private String maxMarks;
     private String numberOfQuestions;
-    private boolean active=false;
+    private boolean active = false;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
@@ -35,7 +35,7 @@ public class Quiz {
     //    @OneToMany(mappedBy = "quiz", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @OneToMany(mappedBy = "quiz", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private Set<Question> questions= new HashSet<>();
+    private Set<Question> questions = new HashSet<>();
 
 
 }

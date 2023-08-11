@@ -37,27 +37,26 @@ public class UserServiceImpl implements UserService {
     JwtUtil jwtUtil;
     @Autowired
     JwtFilter jwtFilter;
-//    @Autowired
-//    private RoleRepository roleRepository;
+
 
     @Override
     public ResponseEntity<String> signup(Map<String, String> requestMap) {
-        try{
-            if(this.validateSignupMap(requestMap,false)){
-                User user= userRepo.findByEmailId(requestMap.get("email"));
-                if(Objects.isNull(user)){
-                    userRepo.save(this.getUserFromMap(requestMap,false));
+        try {
+            if (this.validateSignupMap(requestMap, false)) {
+                User user = userRepo.findByEmail(requestMap.get("email"));
+                if (Objects.isNull(user)) {
+                    userRepo.save(this.getUserFromMap(requestMap, false));
                     return new ResponseEntity<>("Successfully Registered", HttpStatus.OK);
-                }else{
-                    return new ResponseEntity<>("Email already exists",HttpStatus.BAD_REQUEST);
+                } else {
+                    return new ResponseEntity<>("Email already exists", HttpStatus.BAD_REQUEST);
                 }
-            }else {
-                return  new ResponseEntity<>("Invalid Data",HttpStatus.BAD_REQUEST);
+            } else {
+                return new ResponseEntity<>("Invalid Data", HttpStatus.BAD_REQUEST);
             }
-        }catch (Exception exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
-        return  new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("Something Went Wrong", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private boolean validateSignupMap(Map<String, String> requestMap, boolean validateId) {
@@ -67,29 +66,21 @@ public class UserServiceImpl implements UserService {
 //                && requestMap.containsKey("email")
 //                && requestMap.containsKey("password")
 //                && requestMap.containsKey("phone")){
-////                && requestMap.containsKey("profile")){
+//                && requestMap.containsKey("profile")){
 //            return true;
-        if(requestMap.containsKey("email")){
-            if(requestMap.containsKey("id")&& validateId){
+        if (requestMap.containsKey("email")) {
+            if (requestMap.containsKey("id") && validateId) {
                 return true;
-            }else return !validateId;
+            } else return !validateId;
         }
-        return  false;
+        return false;
     }
 
-//    private boolean validateSignMap(Map<String,String> requestMap,boolean validateId){
-//        if(requestMap.containsKey("name")){
-//            if(requestMap.containsKey("id")&& validateId){
-//                return true;
-//            }else return !validateId;
-//        }
-//        return false;
-//    }
-    private User getUserFromMap(Map<String,String> requestMap, boolean isAdd) {
+    private User getUserFromMap(Map<String, String> requestMap, boolean isAdd) {
         User user = new User();
-        if(isAdd){
+        if (isAdd) {
             user.setId(Integer.parseInt(requestMap.get("id")));
-        }else user.setStatus("true");
+        } else user.setStatus("true");
         user.setFirstName(requestMap.get("firstName"));
         user.setLastName(requestMap.get("lastName"));
         user.setUserName(requestMap.get("userName"));
@@ -102,82 +93,44 @@ public class UserServiceImpl implements UserService {
         user.setRole("user");
         return user;
     }
-//    private User getUserFromMap(Map<String, String> requestMap, boolean isAdd) {
-//        Product product=new Product();
-//        if(isAdd){
-//            product.setId(Integer.parseInt(requestMap.get("id")));
-//        }else product.setStatus("true");
-//        product.setName(requestMap.get("name"));
-//        product.setDescription(requestMap.get("description"));
-//        product.setPrice(Integer.parseInt(requestMap.get("price")));
-//        return product;
-//
-//    }
 
     @Override
-    public ResponseEntity<String> login (Map<String,String> requestMap){
+    public ResponseEntity<String> login(Map<String, String> requestMap) {
         log.info("Inside login");
-        try{
-            Authentication authentication= authenticationManager.authenticate(new UsernamePasswordAuthenticationToken
-                    (requestMap.get("userName"),requestMap.get("password")));
-            if(authentication.isAuthenticated()){
-                if(customerUserDetailsService.getUserDetail().getStatus().equalsIgnoreCase("true")){
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestMap.get("userName"), requestMap.get("password")));
+            if (authentication.isAuthenticated()) {
+                if (customerUserDetailsService.getUserDetail().getStatus().equalsIgnoreCase("true")) {
 //                    return  new ResponseEntity<String>("{\"token\":\""+
 //                            jwtUtil.generateToken(customerUserDetailsService.getUserDetail().getEmail(),
 //                                    customerUserDetailsService.getUserDetail().getRole())+"\"}",HttpStatus.OK);
-                    return  new ResponseEntity<String>("{\"token\":\""+
-                            jwtUtil.generateToken(customerUserDetailsService.getUserDetail().getEmail(),
-                                    customerUserDetailsService.getUserDetail().getRole())+"\",\"role\":\""+customerUserDetailsService.getUserDetail().getRole()+"\"}",HttpStatus.OK);
+                    return new ResponseEntity<String>("{\"token\":\"" + jwtUtil.generateToken(customerUserDetailsService.getUserDetail().getEmail(), customerUserDetailsService.getUserDetail().getRole()) + "\",\"role\":\"" + customerUserDetailsService.getUserDetail().getRole() + "\"}", HttpStatus.OK);
 
-                }
-                else{
-                    return new ResponseEntity<String>("{\"message\":\""+"Wait for admin approval"+"\"}",HttpStatus.BAD_REQUEST );
+                } else {
+                    return new ResponseEntity<String>("{\"message\":\"" + "Wait for admin approval" + "\"}", HttpStatus.BAD_REQUEST);
                 }
             }
-        }catch (Exception exception){
-            log.error("{}",exception);
+        } catch (Exception exception) {
+            log.error("{}", exception);
         }
-        return new ResponseEntity<String>("{\"message\":\""+"Bad credentials"+"\"}",HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>("{\"message\":\"" + "Bad credentials" + "\"}", HttpStatus.BAD_REQUEST);
     }
-//    @Override
-//    public User createUser(User user, Set<UserRole> userRoles) {
-//        return null;
-//    }
 
-//    @Override
-//    public ResponseEntity<List<UserWrapper>> getAllUser() {
-//        try{
-//            if(jwtFilter.isAdmin()){
-////                return new ResponseEntity<>(userRepo.getAllUser(),HttpStatus.OK);
-//                return new ResponseEntity<>(userRepo.getAllUser(),HttpStatus.OK);
-//            }else
-//                return new ResponseEntity<>(userRepo.getByUsername(jwtFilter.getCurrentUser()),HttpStatus.OK);
-//        }catch(Exception ex){
-//            ex.printStackTrace();
-//        }
-//        return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
 
     @Override
     public List<User> getAllUser() {
-        
-//        return this.userRepo.findAll();
-
-            if(jwtFilter.isAdmin()){
-//                return new ResponseEntity<>(userRepo.getAllUser(),HttpStatus.OK);
-                return this.userRepo.getAllUser();
-            }
-//                return new ResponseEntity<>(userRepo.getByUsername(jwtFilter.getCurrentUser()),HttpStatus.OK);
-
-        return  this.userRepo.getByUsername(jwtFilter.getCurrentUser());
+        if (jwtFilter.isAdmin()) {
+            return this.userRepo.getAllUser();
+        }
+        return this.userRepo.getByUsername(jwtFilter.getCurrentUser());
     }
 
     @Override
     public ResponseEntity<Optional> getCurrentUser() {
-        try{
+        try {
 
-                return new ResponseEntity<>(userRepo.getByName(jwtFilter.getCurrentUser()),HttpStatus.OK);
-        }catch(Exception ex){
+            return new ResponseEntity<>(userRepo.getByName(jwtFilter.getCurrentUser()), HttpStatus.OK);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -186,17 +139,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<String> updateStatus(Map<String, String> requestMap) {
         try {
-            if(jwtFilter.isAdmin()){
-               Optional<User> optional = userRepo.findById(Integer.parseInt(requestMap.get("id")));
-               if(optional.isPresent()){
-                   userRepo.updateStatus(requestMap.get("status"),Integer.parseInt(requestMap.get("id")) );
-                   return new ResponseEntity<>("User status updated successfully",HttpStatus.OK);
-               }
-               else {
-                   return new ResponseEntity<>("User id doesn't exist",HttpStatus.OK);
-               }
-            }else
-                return new ResponseEntity<>("Unauthorized access",HttpStatus.UNAUTHORIZED);
+            if (jwtFilter.isAdmin()) {
+                Optional<User> optional = userRepo.findById(Integer.parseInt(requestMap.get("id")));
+                if (optional.isPresent()) {
+                    userRepo.updateStatus(requestMap.get("status"), Integer.parseInt(requestMap.get("id")));
+                    return new ResponseEntity<>("User status updated successfully", HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>("User id doesn't exist", HttpStatus.OK);
+                }
+            } else return new ResponseEntity<>("Unauthorized access", HttpStatus.UNAUTHORIZED);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -206,49 +157,48 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<String> update(Map<String, String> requestMap) {
-        try{
-            if(jwtFilter.isAdmin()){
+        try {
+            if (jwtFilter.isAdmin()) {
 //                if(this.validateUserMap(requestMap,true)){
-                if(this.validateSignupMap(requestMap,false)){
-                    Optional<User> optional=userRepo.findById(Integer.parseInt(requestMap.get("id")));
-                    if(optional.isPresent()){
+                if (this.validateSignupMap(requestMap, false)) {
+                    Optional<User> optional = userRepo.findById(Integer.parseInt(requestMap.get("id")));
+                    if (optional.isPresent()) {
 //                        User userFromMap=this.getUserFromMap(requestMap,true);
-                        User userFromMap=this.getUserFromMap(requestMap,true);
+                        User userFromMap = this.getUserFromMap(requestMap, true);
                         userFromMap.setStatus(optional.get().getStatus());
                         userRepo.save(userFromMap);
-                        return new ResponseEntity<>("User Updated Successfully",HttpStatus.OK) ;
+                        return new ResponseEntity<>("User Updated Successfully", HttpStatus.OK);
 
-                    }else return new ResponseEntity<>("User with id " + requestMap.get("id") + " does not exists", HttpStatus.NOT_FOUND);
-                }else return new ResponseEntity<>("Data is Invalid",HttpStatus.BAD_REQUEST);
-            }else return new ResponseEntity<>("Unauthorized Access",HttpStatus.UNAUTHORIZED);
+                    } else
+                        return new ResponseEntity<>("User with id " + requestMap.get("id") + " does not exists", HttpStatus.NOT_FOUND);
+                } else return new ResponseEntity<>("Data is Invalid", HttpStatus.BAD_REQUEST);
+            } else return new ResponseEntity<>("Unauthorized Access", HttpStatus.UNAUTHORIZED);
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new ResponseEntity<>("Something went wrong",HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
     public ResponseEntity<String> deleteUser(Integer id) {
-        try{
-            if(jwtFilter.isAdmin()){
-                Optional<User> optional=userRepo.findById(id);
-                if(optional.isPresent()){
+        try {
+            if (jwtFilter.isAdmin()) {
+                Optional<User> optional = userRepo.findById(id);
+                if (optional.isPresent()) {
                     userRepo.deleteById(id);
-                    return new ResponseEntity<>("User was deleted successfully",HttpStatus.OK);
-                }else{
-                    return new ResponseEntity<>("User with id:"+id+"does not exist",HttpStatus.NOT_FOUND);
+                    return new ResponseEntity<>("User was deleted successfully", HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>("User with id:" + id + "does not exist", HttpStatus.NOT_FOUND);
                 }
-            }else{
-                return new ResponseEntity<>("You are not authorized for this action",HttpStatus.UNAUTHORIZED);
+            } else {
+                return new ResponseEntity<>("You are not authorized for this action", HttpStatus.UNAUTHORIZED);
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new ResponseEntity<>("Something went wrong due to server",HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("Something went wrong due to server", HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-
 
 
 }

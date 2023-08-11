@@ -11,28 +11,27 @@ import { QuizService } from 'src/app/services/quiz/quiz.service';
   styleUrls: ['./update-question.component.css'],
 })
 export class UpdateQuestionComponent implements OnInit {
-
   public Editor = ClassicEditor;
 
-  @ViewChild('editorRef', { static: false }) editorInstance: any; // You can use 'CKEditorComponent' type here if needed
+  @ViewChild('editorRef', { static: false }) editorInstance: any;
 
   quesId = 0;
   quiz!: any;
   // question!: any;
   qId: any;
 
-  question={
-    quiz:{
-      qid:'',
+  question = {
+    quiz: {
+      qid: '',
       // title:''
-    } ,
-    content:'',
-    option1:'',
-    option2:'',
-    option3:'',
-    option4:'',
-    answer:'',
-  }
+    },
+    content: '',
+    option1: '',
+    option2: '',
+    option3: '',
+    option4: '',
+    answer: '',
+  };
   qTitle: any;
 
   constructor(
@@ -44,15 +43,14 @@ export class UpdateQuestionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     this.quesId = this._route.snapshot.params['quesId'];
-    this.qId= this._route.snapshot.params['qid'];
-    this.qTitle= this._route.snapshot.params['title'];
+    this.qId = this._route.snapshot.params['qid'];
+    this.qTitle = this._route.snapshot.params['title'];
 
     // alert(this.quesId);
     // alert(this.qId);
 
-    this.question.quiz['qid']= this.qId;
+    this.question.quiz['qid'] = this.qId;
     // this.question.quiz['title']=this.qTitle
     this._question.getQuestion(this.quesId).subscribe(
       (data: any) => {
@@ -65,28 +63,26 @@ export class UpdateQuestionComponent implements OnInit {
     );
   }
 
-  public updateData(){
+  public updateData() {
     // alert('test');
-     //validate it
+    //validate it
 
-     this._question.updateQuestion(this.question).subscribe(
-      (data:any)=>
-      {
-        this.toastr.success('Success!!',' Question Updated Successfully');
+    this._question.updateQuestion(this.question).subscribe(
+      (data: any) => {
+        this.toastr.success('Success!!', ' Question Updated Successfully');
         // this.router.navigate(['/admin/quizzes']);
         // Add a delay of 2 seconds (adjust the value as needed)
-    setTimeout(() => {
-      // this.router.navigate(['/admin/quizzes/']);
-      this.router.navigate(['/admin/view-questions/'+this.qId+'/'+this.qTitle]);
-
-    }, 500);
+        setTimeout(() => {
+          // this.router.navigate(['/admin/quizzes/']);
+          this.router.navigate([
+            '/admin/view-questions/' + this.qId + '/' + this.qTitle,
+          ]);
+        }, 500);
       },
-      (error)=>{
+      (error) => {
         console.log(error);
-          this.toastr.error('Error','Error in updating question');
+        this.toastr.error('Error', 'Error in updating question');
       }
-      );
-     
-   }
-
+    );
+  }
 }

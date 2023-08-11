@@ -5,23 +5,19 @@ import { ShareddataService } from 'src/app/services/sharedData/shared-data.servi
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css'],
 })
-export class UserProfileComponent implements OnInit{
-
-  user! : any;
+export class UserProfileComponent implements OnInit {
+  user!: any;
 
   constructor(
     private sharedDataService: ShareddataService,
-    private authService: AuthService,
-   
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.sharedDataService.userDetailsObservable.subscribe((userDetails) => {
       this.user = userDetails;
     });
-    
-  
   }
 }
