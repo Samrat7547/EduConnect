@@ -62,7 +62,7 @@ export class ViewCategoriesComponent implements OnInit {
           },
           (error)=>{
             console.log(error);
-            this.toastr.error('Error','Error in deleting quiz');
+            this.toastr.error('Error','Delete all its quizzes first');
           }
         );
       }

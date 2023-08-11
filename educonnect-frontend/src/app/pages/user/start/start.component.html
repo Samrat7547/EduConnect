@@ -1,3 +1,18 @@
+
+    
+        <!-- Fixed Video Container -->
+        
+        <div class="fixed-video-container" [ngClass]="{ 'hide-recording': !showLiveRecording }" >
+          <h1 style="font-size: 26px; font-weight: bold; color: red;">Live Recording</h1>
+          <div class="d-flex justify-content-center">
+            <video #videoElement width="265" height="140" autoplay></video>
+          </div>
+        </div>
+       
+       
+
+  
+
 <div class="bootstrap-wrapper overall" *ngIf="!isSubmit">
     <div class="container-fluid">
         <div class="row">
@@ -39,6 +54,8 @@
 
 
             <div class="col-md-8">
+
+               
                 <ng-container *ngIf="questions">
 
                     <!-- <h1>{{questions[0].quiz.title}}</h1> -->
@@ -47,7 +64,7 @@
 
 
                 </ng-container>
-                <mat-card *ngFor="let q of questions; let i =index" class="mt10" style="background-color: aqua;">
+                <mat-card *ngFor="let q of questions; let i =index" class="mt10" style="background-color: rgb(208, 249, 249);">
                     <mat-card-content>
                         <div style="display: flex; align-items: center; font-size: 20px;">
                             <p style="margin-right: 5px;"><b>{{ i + 1 }})</b></p>
@@ -96,9 +113,13 @@
                     <button (click)="submitQuiz()" class="" mat-raised-button color="primary">Submit Quiz</button>
                     <!-- <button class="" mat-raised-button color="primary">Submit Quiz</button> -->
                 </div>
+                 
+               
 
             </div>
             <div class="col-md-2 fixed-column">
+
+               
 
                 <mat-card class="" style=" margin-top: 60px; background-color: aquamarine;">
                     <mat-card-header>
@@ -116,11 +137,15 @@
                             style="margin: auto; margin-top: 20px;"></mat-spinner>
                     </mat-card-content>
                 </mat-card>
+
+               
+               
             </div>
 
         </div>
     </div>
 </div>
+    
 
 
 <!-- showing results -->

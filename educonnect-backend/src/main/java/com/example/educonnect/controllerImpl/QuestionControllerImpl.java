@@ -43,11 +43,12 @@ public class QuestionControllerImpl implements QuestionController {
 //        return ResponseEntity.ok(questionsOfQuiz);
 
         Quiz quiz= this.quizService.getQuiz(qid);
+        log.info(String.valueOf(quiz));
         List<Question> questionsOfQuiz=this.questionService.getQuestionsOfQuiz(quiz);
         List list= new ArrayList(questionsOfQuiz);
         int result = Integer.parseInt(quiz.getNumberOfQuestions());
         if (list.size() > Integer.parseInt(quiz.getNumberOfQuestions())){
-            list= list.subList(0,Integer.parseInt(quiz.getNumberOfQuestions()+1));
+            list= list.subList(0,Integer.parseInt(quiz.getNumberOfQuestions()));
         }
         Collections.shuffle(list);
 //        log.info(String.valueOf(result));
